@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "otto_preact_form": "git+https://github.com/RockyEMSqr/otto_preact_form.git",
     "preact": "^10.5.13"
   },
   "devDependencies": {
