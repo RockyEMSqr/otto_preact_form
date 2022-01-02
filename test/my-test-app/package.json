@@ -7,7 +7,9 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "otto_preact_form": "git+https://github.com/RockyEMSqr/otto_preact_form.git",
+    "@types/luxon": "^2.0.8",
+    "luxon": "^2.2.0",
+    "otto_preact_form": "file:../../index.ts",
     "preact": "^10.5.13"
   },
   "devDependencies": {

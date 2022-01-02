@@ -1,6 +1,5 @@
 import { render } from 'preact'
 import { App } from './app'
-import './index.css'
-import {hello} from 'otto_preact_form';
-hello();
+// import './index.css'
+import { h } from 'preact';
 render(<App />, document.getElementById('app')!)
