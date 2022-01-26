@@ -2,6 +2,7 @@ import { delve, dset, formatPhoneNumber } from "../utils";
 import { Input } from "./input";
 import { Component } from 'preact';
 import { Select } from './select';
+import { h } from 'preact';
 export class Phone extends Input {
     getValue() {
         let val = super.getValue();

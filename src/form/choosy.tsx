@@ -1,11 +1,12 @@
 import { delve, dset } from "../utils";
-import { Input, Item } from "./input";
+import { Input, InputNameCheckProps, Item } from "./input";
 import { Hidden } from './hidden';
+import { h } from 'preact';
 /**
  * multi select thingamajig
  */
 
-export class Choosy extends Input<{
+export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     items: Item[],
 }, {
     matches: Item[],

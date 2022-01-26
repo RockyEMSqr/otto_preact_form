@@ -1,6 +1,8 @@
 import { Component } from 'preact';
 import { Text } from './text';
 import { Select } from './select';
+import { h } from 'preact';
+import { AllInputProps, InputNameCheckProps, InputProps } from './input';
 let usStates = [
     { name: 'Alabama', value: 'AL' },
     { name: 'Alaska', value: 'AK' },
@@ -55,15 +57,22 @@ let usStates = [
     { name: 'Wisconsin', value: 'WI' },
     { name: 'Wyoming', value: 'WY' }
 ];
-export class Address extends Component<any, any>{
+export class Address<T> extends Component<AllInputProps<InputNameCheckProps<T>>, any> {
 
+    getNamePrefix() {
+        let prefix = `${this.props.name ? this.props.name + '.' : ''}`;
+        if (prefix == 'address.') {
+            return prefix;
+        }
+        return prefix + 'address.';
+    }
     render(props: any, state: any) {
         return <div class="address-block">
-            <Text required={this.props.required} linkTo={this.props.linkTo} label="Street" name={`${this.props.name ? this.props.name + '.' : ''}address.street`} inputClass="long" />
+            <Text required={this.props.required} linkTo={this.props.linkTo} label="Street" name={`${this.getNamePrefix()}street`} inputClass="long" />
             <div class="multi-input">
-                <Text required={this.props.required} linkTo={this.props.linkTo} label="City" name={`${this.props.name ? this.props.name + '.' : ''}address.city`} />
-                <Select required={this.props.required} items={([] as any).concat(usStates)} linkTo={this.props.linkTo} label="State" name={`${this.props.name ? this.props.name + '.' : ''}address.state`} />
-                <Text required={this.props.required} linkTo={this.props.linkTo} label="Zip" name={`${this.props.name ? this.props.name + '.' : ''}address.zip`} inputClass="short" />
+                <Text required={this.props.required} linkTo={this.props.linkTo} label="City" name={`${this.getNamePrefix()}city`} />
+                <Select required={this.props.required} items={([] as any).concat(usStates)} linkTo={this.props.linkTo} label="State" name={`${this.getNamePrefix()}state`} />
+                <Text required={this.props.required} linkTo={this.props.linkTo} label="Zip" name={`${this.getNamePrefix()}zip`} inputClass="short" />
             </div>
         </div>;
     }

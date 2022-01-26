@@ -1,7 +1,7 @@
 import { delve, dset } from "../utils";
-import { Input } from "./input";
-
-export class Checkbox extends Input {
+import { Input, InputNameCheckProps } from "./input";
+import { h } from 'preact';
+export class Checkbox<T> extends Input<InputNameCheckProps<T>> {
     type = "checkbox";
     onClick(v: any, e: any) {
         if (this.props.onClick) {

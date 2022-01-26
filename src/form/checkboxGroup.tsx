@@ -1,5 +1,6 @@
 import { Input, Item } from "./input";
 import { Checkbox } from './checkbox';
+import { h } from 'preact';
 export class CheckboxGroup extends Input<{ items: Item[] }> {
     type = "checkbox";
 

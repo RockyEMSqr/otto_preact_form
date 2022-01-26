@@ -1,6 +1,8 @@
-import { Input } from "./input";
+import { Input, InputNameCheckProps } from "./input";
+import * as React from 'preact/compat';
+import { h } from 'preact'; // error using vite?
+export class Textarea<T> extends Input<InputNameCheckProps<T>>{
 
-export class Textarea extends Input<any>{
     shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {
         //todo(rc): why this always return true? Whats did it fix? what browser?
         return true;

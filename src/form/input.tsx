@@ -9,14 +9,20 @@ import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath';
 
 export type Item = { name: any, value: any };
 
-export type InputNameCheckProps<T, N extends string = ''> = {
-    name?: T extends object ? AutoPath<T, N> : string
+type NestedKeyOf<ObjectType extends object> =
+    { [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
+        ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+        : `${Key}`
+    }[keyof ObjectType & (string | number)];
+export type InputNameCheckProps<T> = {
+    name?: T extends object ? NestedKeyOf<T> : string
 }
 export type InputProps = { linkTo?: { state: any, setState: any }, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
+export type AllInputProps<P> = P & InputProps
+    & Pick<JSX.HTMLAttributes, Exclude<keyof JSX.HTMLAttributes, keyof InputProps>>;
 export type InputState = { value?: any }
 export abstract class Input<P = {}, S = {}> extends Component<
-    P & InputProps
-    & Pick<JSX.HTMLAttributes, Exclude<keyof JSX.HTMLAttributes, keyof InputProps>>, S & InputState>{
+    AllInputProps<P>, S & InputState>{
     abstract type: string;
     prepend: undefined | string | JSX.Element;
     append: undefined | string | JSX.Element;

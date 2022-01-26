@@ -1,7 +1,7 @@
 import { addBlankDefaultToItems, delve } from "../utils";
-import { Input, Item } from "./input";
-
-export class Select extends Input<{ addDefaultBlankToItems?: boolean | string, items: Item[], readOnly?: boolean, }>{
+import { Input, InputNameCheckProps, Item } from "./input";
+import { h } from 'preact';
+export class Select<T> extends Input<InputNameCheckProps<T> & { addDefaultBlankToItems?: boolean | string, items: Item[], readOnly?: boolean, }>{
     type = "";
     isSelected(val: any) {
         if (this.props.linkTo) {

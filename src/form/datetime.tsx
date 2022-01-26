@@ -1,8 +1,8 @@
 import { h } from 'preact';
 import { DateTime } from 'luxon';
-import { Input, Hidden } from '../../index'
+import { Input, Hidden, InputNameCheckProps } from '../../index'
 import { dset } from '../utils';
-export abstract class DTInput extends Input {
+export abstract class DTInput<T> extends Input<InputNameCheckProps<T>> {
     getDT(val: number | string | Date | undefined): DateTime | undefined {
         let dt: DateTime | undefined;
         if (val) {
@@ -46,7 +46,7 @@ export abstract class DTInput extends Input {
         return this.onChangeCB;
     }
 }
-export class FDate extends DTInput {
+export class FDate<T> extends DTInput<T> {
     type = "date"
 
     getDateString() {
@@ -70,7 +70,7 @@ export class FDate extends DTInput {
     }
 }
 
-export class Time extends DTInput {
+export class Time<T> extends DTInput<T> {
     type = "time";
 
     getTimeStr() {
@@ -94,7 +94,7 @@ export class Time extends DTInput {
     }
 
 }
-export class FDateTime extends DTInput {
+export class FDateTime<T> extends DTInput<T> {
     type: string = 'datetime';
     getDateStr() {
         let dt = this.getDT(super.getValue());
