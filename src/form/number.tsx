@@ -21,7 +21,7 @@ export class USD<T> extends Input<InputNameCheckProps<T>> {
         return super.render({ ...props, ...{ step: 0.01 } })
     }
 }
-export class Percent<T> extends Input<InputNameCheckProps<T>> {
+export class Percent<T=unknown> extends Input<InputNameCheckProps<T>> {
     type = "number";
     // prepend = <div class="input-group-prepend">
     //     <div class="input-group-text">%</div>

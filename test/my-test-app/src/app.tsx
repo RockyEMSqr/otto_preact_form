@@ -6,7 +6,7 @@ import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 // import { CheckName, get, Text } from '@emsquared/otto_preact_form/src/form/sandbox/textTest';
 import { Text, Password, Textarea, Select, Address, SimpleModal } from '@emsquared/otto_preact_form';
-import { linkTo } from '@emsquared/otto_preact_form/src/hooks';
+import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
 export function App() {
   let [state, setState] = useState<{
@@ -19,8 +19,8 @@ export function App() {
   let idks: StateType = {
     a: 'asdf'
   } as StateType;
-  let LT = linkTo(state, setState);
-  let LTs1 = linkTo(s1, ss1);
+  let LT = useLinkTo(state, setState);
+  let LTs1 = useLinkTo(s1, ss1);
   // let [state, setState] = [{}, (s: any) => ({ ...s })]
   function submit(e: any) {
     console.log(e, state)

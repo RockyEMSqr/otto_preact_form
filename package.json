@@ -2,7 +2,9 @@
   "name": "@emsquared/otto_preact_form",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "source": "./index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "test": "test"
   },
