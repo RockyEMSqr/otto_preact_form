@@ -1,5 +1,4 @@
 import { Input, InputNameCheckProps } from "./input";
-import * as React from 'preact/compat';
 import { h } from 'preact'; // error using vite?
 export class Textarea<T> extends Input<InputNameCheckProps<T>>{
 
