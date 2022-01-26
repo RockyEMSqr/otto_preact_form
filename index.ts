@@ -18,4 +18,7 @@ export * from './src/form/datetime';
 export * from './src/form/richTextEditor';
 export * from './src/components/loadingComponent'
 export * from './src/components/modal'
-export * from './src/components/page'
+export * from './src/components/page';
+
+
+export * from './src/hooks';
