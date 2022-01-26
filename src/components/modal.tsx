@@ -1,4 +1,13 @@
-import { h, Component } from "preact";
+import {Component } from "preact";
+
+// @ts-ignore
+if(!h){
+
+    let preact = require('preact')
+    // @ts-ignore
+    h = preact.h
+}
+
 import { createPortal } from 'preact/compat'
 interface ModalProps {
     noLabel?: boolean,
