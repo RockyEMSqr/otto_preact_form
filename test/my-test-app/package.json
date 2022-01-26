@@ -7,9 +7,9 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@emsquared/otto_preact_form": "file:../..",
     "@types/luxon": "^2.0.8",
     "luxon": "^2.2.0",
-    "otto_preact_form": "file:../../index.ts",
     "preact": "^10.5.13"
   },
   "devDependencies": {

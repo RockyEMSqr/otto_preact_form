@@ -22,7 +22,9 @@ export function link(state: any, setState: Function, path: string) {
             setState({ ...state });
         }, [state]
     )
-} export type InputTypeStrings = 'text' | 'date';
+}
+
+export type InputTypeStrings = 'text' | 'date';
 export function getInput<T extends object, N extends string>(type: InputTypeStrings, p: InputProps<T, N>, value?: any) {
     let id = getId(p.name);
     let val = value || dget(p.state, p.name);

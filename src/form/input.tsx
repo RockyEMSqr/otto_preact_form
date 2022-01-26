@@ -4,10 +4,15 @@ import linkState from 'linkstate';
 
 import { JSXInternal as JSX } from 'preact/src/jsx';
 import { delve } from '../utils';
+import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath';
 
 
 export type Item = { name: any, value: any };
-export type InputProps = { linkTo?: Component<any, any>, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
+
+export type InputNameCheckProps<T, N extends string = ''> = {
+    name?: T extends object ? AutoPath<T, N> : string
+}
+export type InputProps = { linkTo?: { state: any, setState: any }, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
 export type InputState = { value?: any }
 export abstract class Input<P = {}, S = {}> extends Component<
     P & InputProps

@@ -2,8 +2,8 @@ import { h, render, Component } from 'preact';
 import { Form, Text, Address, USD, RadioGroup, Number as NumNum, Phone, Select, MultiSelect, CheckboxGroup, Checkbox, Choosy } from '../../../index';
 
 import { DateTime } from 'luxon';
-import { FDate, Time, FDateTime } from '../../../index';
-import { Percent as _P, USD as _USD, Number as _Num } from '../../../index';
+import { FDate, Time, FDateTime } from '@emsquared/otto_preact_form';
+import { Percent as _P, USD as _USD, Number as _Num } from '@emsquared/otto_preact_form';
 export namespace Num {
     export function formatTwoDecimalOrNull(num: number) {
         let n = castToNumOrNull(num);
@@ -65,7 +65,7 @@ function set_JSON_reaplacer(key: any, value: any) {
     }
     return value;
 }
-export class FormTestApp extends Component {
+export class FormTestApp extends Component<{ label: string }, {}> {
     state = {
         x: { percentPre: 99.999999999 },
         textArr: [] as any[], ob: { rads: 2, unoCheck: null },
