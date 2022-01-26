@@ -1,11 +1,11 @@
 import {Component } from "preact";
 
 // @ts-ignore
-if(!h){
+if(!global.h){
 
     let preact = require('preact')
     // @ts-ignore
-    h = preact.h
+    global.h = preact.h
 }
 
 import { createPortal } from 'preact/compat'
