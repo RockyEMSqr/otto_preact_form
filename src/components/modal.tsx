@@ -1,12 +1,12 @@
-import {Component } from "preact";
-
+import {h, Component } from "preact";
+// console.log(h)
 // @ts-ignore
-if(!global.h){
+// if(!global.h){
 
-    let preact = require('preact')
+    // let preact = require('preact')
     // @ts-ignore
-    global.h = preact.h
-}
+    // global.h = preact.h
+// }
 
 import { createPortal } from 'preact/compat'
 interface ModalProps {

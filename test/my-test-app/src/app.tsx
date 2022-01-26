@@ -5,7 +5,7 @@ import { Tabs } from '../../../src/components/tabs';
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 // import { CheckName, get, Text } from '@emsquared/otto_preact_form/src/form/sandbox/textTest';
-import { Text, Password, Textarea, Select, Address } from '@emsquared/otto_preact_form';
+import { Text, Password, Textarea, Select, Address, SimpleModal } from '@emsquared/otto_preact_form';
 import { linkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
 export function App() {
@@ -46,6 +46,9 @@ export function App() {
     <>
       <Tabs>
         <div label="Old Style With name Autocomplete">
+          <SimpleModal useStyle>
+            Hello
+          </SimpleModal>
           <pre>STATE:{JSON.stringify(state)}</pre>
           <pre>S1:{JSON.stringify(s1)}</pre>
           <Text<StateType> name="a" linkTo={LTs1} />
