@@ -2,7 +2,7 @@ import { Component } from 'preact';
 import { Text } from './text';
 import { Select } from './select';
 import { AllInputProps, InputNameCheckProps, InputProps } from './input';
-import h from 'preact'
+import { h } from 'preact'
 let usStates = [
     { name: 'Alabama', value: 'AL' },
     { name: 'Alaska', value: 'AK' },
