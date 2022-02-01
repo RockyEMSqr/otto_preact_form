@@ -1,9 +1,9 @@
 import { delve, dset, formatPhoneNumber } from "../utils";
-import { Input } from "./input";
+import { Input, InputNameCheckProps } from "./input";
 import { Component } from 'preact';
 import { Select } from './select';
 import { h } from 'preact';
-export class Phone extends Input {
+export class Phone<T> extends Input<InputNameCheckProps<T>> {
     getValue() {
         let val = super.getValue();
         if (val) {

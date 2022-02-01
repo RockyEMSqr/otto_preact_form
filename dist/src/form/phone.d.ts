@@ -1,7 +1,7 @@
-import { Input } from "./input";
+import { Input, InputNameCheckProps } from "./input";
 import { Component } from 'preact';
 import { h } from 'preact';
-export declare class Phone extends Input {
+export declare class Phone<T> extends Input<InputNameCheckProps<T>> {
     getValue(): any;
     type: string;
 }
