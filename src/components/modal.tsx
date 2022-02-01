@@ -1,11 +1,11 @@
-import {h, Component } from "preact";
+import { h, Component } from "preact";
 // console.log(h)
 // @ts-ignore
 // if(!global.h){
 
-    // let preact = require('preact')
-    // @ts-ignore
-    // global.h = preact.h
+// let preact = require('preact')
+// @ts-ignore
+// global.h = preact.h
 // }
 
 import { createPortal } from 'preact/compat'
@@ -34,6 +34,7 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
         super(props, ctx);
         let m = document.body;
         if (this.props.selector) {
+            // @ts-ignore
             m = document.querySelector(this.props.selector);
         }
         this.setState({
@@ -159,7 +160,7 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
 
     _renderModal(props, state) {
         if (state.open) {
-            return createPortal(<div class={this.getBackgroundClass()} style={this.props.useStyle && this.backgroundStyle} onClick={this.onBackgroundClick.bind(this)}>
+            return createPortal(<div class={this.getBackgroundClass()} style={this.props.useStyle ? this.backgroundStyle : undefined} onClick={this.onBackgroundClick.bind(this)}>
                 {/* This is the modal foreground */}
                 <div class={this.getModalClass()} style={this.props.useStyle ? this.modalStyle : this.props.modalStyle} onClick={e => { e.stopPropagation() }}>
                     {this.renderModalContent(props, state)}

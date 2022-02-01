@@ -30,7 +30,7 @@ export const dget = dlv;
  * @param fn 
  */
 export function debounce(delay: number, fn: Function) {
-    let timerId: number | null;
+    let timerId: any;
     return function (...args: any[]) {
         if (timerId) {
             clearTimeout(timerId);

@@ -5,8 +5,6 @@ import linkState from 'linkstate';
 import { JSXInternal as JSX } from 'preact/src/jsx';
 import { delve } from '../utils';
 
-import * as React from 'preact/compat';
-
 export type Item = { name: any, value: any };
 
 type NestedKeyOf<ObjectType extends object> =

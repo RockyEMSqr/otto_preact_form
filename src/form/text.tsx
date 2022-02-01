@@ -1,6 +1,5 @@
 import { Input, InputNameCheckProps } from "./input";
 import { h } from 'preact';
-import * as React from 'preact/compat';
 export class Text<T> extends Input<InputNameCheckProps<T>> {
     type = "text";
     render(props?: any, state?: any) {
