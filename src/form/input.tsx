@@ -32,7 +32,7 @@ type Leaves<T = void, D extends number = 5> = [D] extends [never] ? never :
     T extends object ?
     { [K in keyof T]-?: Join<K, Leaves<T[K], Prev[D]>> }[keyof T] : string;
 export type InputNameCheckProps<T = void> = {
-    name?: T extends void ? string : Paths<T>
+    name?: T extends void ? string : string//Paths<T>
 }
 export type InputProps = { linkTo?: { state: any, setState: any }, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
 export type AllInputProps<P> = P & InputProps
