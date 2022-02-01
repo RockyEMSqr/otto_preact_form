@@ -14,10 +14,10 @@ export class Tabs extends Component<any, any>{
         if (this.props.onChange) {
             this.props.onChange(oldComp);
         }
-        oldComp = undefined;
+        oldComp = null;
     }
     createTheGoods(props) {
-        let buttons = [];
+        let buttons:any[] = [];
         let selectedContent = this.state.selectedContent;
         let selectedI = this.state.selectedI;
         // Make a "tab" out of each child
@@ -48,7 +48,7 @@ export class Tabs extends Component<any, any>{
     render() {
         return <div class="tabs">
             <div class="tbtns">
-                {this.state.buttons.map((x, i) => <button type="button" class={this.state.selectedI == i ? 'active' : ''}
+                {this.state.buttons.map((x:any, i) => <button type="button" class={this.state.selectedI == i ? 'active' : ''}
                     onClick={this.onTabButtonClick.bind(this, i)}>{x.label}{x.alert && <span class="bubble-number"> {x.alert}<span class="sr-only"> items need your attention</span></span>}</button>)}
             </div>
             <div class="tcnt">

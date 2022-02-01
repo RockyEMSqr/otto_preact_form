@@ -16,9 +16,12 @@ export * from './src/form/text';
 export * from './src/form/textarea';
 export * from './src/form/datetime';
 export * from './src/form/richTextEditor';
+
+
 export * from './src/components/loadingComponent'
 export * from './src/components/modal'
 export * from './src/components/page';
+export * from './src/components/tabs';
 
 
 export * from './src/hooks';

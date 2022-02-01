@@ -8,9 +8,10 @@ type AType = {
         atype: AType
     }
 };
+let xxx : AType = {} as AType;
 const x = () => {
     return <>
         <Text name="get" />
-        <Text<AType> name="z.atype.z.x" />
+        <Text<typeof xxx> name="z.atype.z.x" />
     </>
 }
