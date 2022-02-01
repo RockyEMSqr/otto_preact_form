@@ -10,6 +10,7 @@ type AType = {
 };
 const x = () => {
     return <>
-        <Text<AType> name="z.x" />
+        <Text name="get" />
+        <Text<AType> name="z.atype.z.atype.z.atype.z.atype.z.atype.z" />
     </>
 }
