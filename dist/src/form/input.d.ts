@@ -4,11 +4,37 @@ export declare type Item = {
     name: any;
     value: any;
 };
-declare type NestedKeyOf<ObjectType extends object> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}` : `${Key}`;
-}[keyof ObjectType & (string | number)];
+declare type Join<K, P> = K extends string | number ? P extends string | number ? `${K}${"" extends P ? "" : "."}${P}` : never : never;
+declare type Prev = [
+    never,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    ...0[]
+];
+declare type Leaves<T, D extends number = 10> = [D] extends [never] ? never : T extends object ? {
+    [K in keyof T]-?: Join<K, Leaves<T[K], Prev[D]>>;
+}[keyof T] : "";
 export declare type InputNameCheckProps<T> = {
-    name?: T extends object ? NestedKeyOf<T> : string;
+    name?: T extends object ? Leaves<T> : string;
 };
 export declare type InputProps = {
     linkTo?: {
