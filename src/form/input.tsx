@@ -7,11 +7,35 @@ import { delve } from '../utils';
 
 export type Item = { name: any, value: any };
 
-type NestedKeyOf<ObjectType extends object> =
+type Decr = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+
+type NestedKeyOf<ObjectType extends object, N extends number = 4> =
     { [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
-        ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
+        ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key], Decr[N]>}`
         : `${Key}`
     }[keyof ObjectType & (string | number)];
+
+type NotRecursiveKeyOf<ObjectType extends object> =
+    { [Key in keyof ObjectType & (string | number)]:
+        ObjectType[Key] extends object
+        ? { [Key1 in keyof ObjectType[Key]  & (string | number)]:
+            ObjectType[Key][Key1] extends object
+            ?   `${Key}.${Key1}` | { 
+                [Key2 in keyof ObjectType[Key][Key1]  & (string | number)]:
+                ObjectType[Key][Key1][Key2] extends object
+                ?   `${Key}.${Key1}.${Key2}` | { 
+                    [Key3 in keyof ObjectType[Key][Key1][Key2]  & (string | number)]:
+                    ObjectType[Key][Key1][Key2] extends object
+                    ?   `${Key}.${Key1}.${Key2}.${Key3}` | 'Max Hit. Tell Rocky if you need more'
+                   :  `${Key}.${Key1}.${Key2}.${Key3}`
+                }[keyof ObjectType[Key][Key1][Key2] & (string | number)]
+               :  `${Key}.${Key1}.${Key2}`
+            }[keyof ObjectType[Key][Key1] & (string | number)]
+           :  `${Key}.${Key1}`
+        }[keyof ObjectType[Key] & (string | number)]  
+    : `${Key}`
+}[keyof ObjectType & (string | number)];
 
 type Join<K, P> = K extends string | number ?
     P extends string | number ?
@@ -32,7 +56,8 @@ type Leaves<T = void, D extends number = 5> = [D] extends [never] ? never :
     T extends object ?
     { [K in keyof T]-?: Join<K, Leaves<T[K], Prev[D]>> }[keyof T] : string;
 export type InputNameCheckProps<T = void> = {
-    name?: T extends void ? string : string//Paths<T>
+    name?: T extends void ? string :
+    T extends Object ? NotRecursiveKeyOf<T> : string;//Paths<T>
 }
 export type InputProps = { linkTo?: { state: any, setState: any }, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
 export type AllInputProps<P> = P & InputProps

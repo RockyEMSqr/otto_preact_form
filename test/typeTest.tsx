@@ -11,6 +11,6 @@ type AType = {
 const x = () => {
     return <>
         <Text name="get" />
-        <Text<AType> name="z.atype.z.atype.z.atype.z.atype.z.atype.z" />
+        <Text<AType> name="z.atype.z.x" />
     </>
 }
