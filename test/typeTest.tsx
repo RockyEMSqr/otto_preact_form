@@ -1,4 +1,4 @@
-import { Text } from '../index';
+import { FDate, Text } from '../index';
 type AType = {
     x: number,
     y: number,
@@ -13,5 +13,6 @@ const x = () => {
     return <>
         <Text name="get" />
         <Text<typeof xxx> name="z.atype.z.x" />
+        <FDate value={new Date().valueOf()} />
     </>
 }

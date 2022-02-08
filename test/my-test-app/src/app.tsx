@@ -8,6 +8,7 @@ import { useState } from 'preact/hooks';
 import { Text, Password, Textarea, Select, Address, SimpleModal } from '@emsquared/otto_preact_form';
 import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
+import { FDate } from '../../../src/form/datetime';
 export function App() {
   let [state, setState] = useState<{
     test1: '',
@@ -51,6 +52,7 @@ export function App() {
           </SimpleModal>
           <pre>STATE:{JSON.stringify(state)}</pre>
           <pre>S1:{JSON.stringify(s1)}</pre>
+          <FDate value={new Date().valueOf()} />
           <Text<StateType> name="a" linkTo={LTs1} />
           <Text<typeof state> name="p.x" linkTo={LT} />
           <Password<StateType> name="a" linkTo={LTs1} />

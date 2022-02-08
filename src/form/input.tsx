@@ -70,6 +70,9 @@ export abstract class Input<P = {}, S = {}> extends Component<
     append: undefined | string | JSX.Element;
     inp: HTMLInputElement | undefined | null;
     getValue() {
+        if (this.state.value) {
+            return this.state.value;
+        }
         if (this.props['value'] != undefined) {
             return this.props['value'];
         }
@@ -77,9 +80,7 @@ export abstract class Input<P = {}, S = {}> extends Component<
             let dval = delve(this.props.linkTo.state, this.props.name as string);
             return dval;
         }
-        if (this.state.value) {
-            return this.state.value;
-        }
+
         if (this.inp) {
             return this.inp.value;
         }
