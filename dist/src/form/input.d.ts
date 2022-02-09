@@ -5,7 +5,7 @@ export declare type Item = {
     value: any;
 };
 declare type NotRecursiveKeyOf<ObjectType extends object> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? {
+    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object ? `${Key}` | {
         [Key1 in keyof ObjectType[Key] & (string | number)]: ObjectType[Key][Key1] extends object ? `${Key}.${Key1}` | {
             [Key2 in keyof ObjectType[Key][Key1] & (string | number)]: ObjectType[Key][Key1][Key2] extends object ? `${Key}.${Key1}.${Key2}` | {
                 [Key3 in keyof ObjectType[Key][Key1][Key2] & (string | number)]: ObjectType[Key][Key1][Key2] extends object ? `${Key}.${Key1}.${Key2}.${Key3}` | 'Max Hit. Tell Rocky if you need more' : `${Key}.${Key1}.${Key2}.${Key3}`;

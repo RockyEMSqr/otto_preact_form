@@ -19,7 +19,7 @@ type NestedKeyOf<ObjectType extends object, N extends number = 4> =
 type NotRecursiveKeyOf<ObjectType extends object> =
     { [Key in keyof ObjectType & (string | number)]:
         ObjectType[Key] extends object
-        ? { [Key1 in keyof ObjectType[Key]  & (string | number)]:
+        ? `${Key}` | { [Key1 in keyof ObjectType[Key]  & (string | number)]:
             ObjectType[Key][Key1] extends object
             ?   `${Key}.${Key1}` | { 
                 [Key2 in keyof ObjectType[Key][Key1]  & (string | number)]:

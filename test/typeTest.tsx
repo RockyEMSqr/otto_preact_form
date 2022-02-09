@@ -5,14 +5,18 @@ type AType = {
     z: {
         x: number,
         y: number,
-        atype: AType
-    }
+        atype: AType,
+        d:Date
+    },
+    d:Date
 };
 let xxx : AType = {} as AType;
 const x = () => {
     return <>
         <Text name="get" />
         <Text<typeof xxx> name="z.atype.z.x" />
+        <Text<AType> name="d" />
+        <Text<AType> name="z.d" />
         <FDate value={new Date().valueOf()} />
     </>
 }
