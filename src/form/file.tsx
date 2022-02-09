@@ -1,5 +1,5 @@
 import { Input } from "./input"
-
+import {h} from 'preact';
 export class File extends Input {
     type = "file"
     render(props?: any, state?: any) {
