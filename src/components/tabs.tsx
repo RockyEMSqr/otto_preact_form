@@ -49,7 +49,7 @@ export class Tabs extends Component<any, any>{
         return <div class="tabs">
             <div class="tbtns">
                 {this.state.buttons.map((x:any, i) => <button type="button" class={this.state.selectedI == i ? 'active' : ''}
-                    onClick={this.onTabButtonClick.bind(this, i)}>{x.label}{x.alert && <span class="bubble-number"> {x.alert}<span class="sr-only"> items need your attention</span></span>}</button>)}
+                   onClick={this.onTabButtonClick.bind(this, i)}><span class="tname">{x.label}</span>{x.alert && <span class="bubble-number"> {x.alert}<span class="sr-only"> items need your attention</span></span>}</button>)}
             </div>
             <div class="tcnt">
                 {this.state.selectedContent}
