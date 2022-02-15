@@ -19,7 +19,9 @@ export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
     remove(i: Item, e: any): void;
     searchItems(e: any): void;
     onKeyDown(e: KeyboardEvent): boolean;
+    blurTimer: any;
     onBlur(e: any): void;
+    focusInput(): void;
     onInputFocus(): void;
     render(props: any, state: any): h.JSX.Element;
 }

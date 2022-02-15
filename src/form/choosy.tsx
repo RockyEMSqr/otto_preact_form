@@ -118,38 +118,53 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         this.setState({ ...this.state, matchIndex: mi, matches });
         return false;
     }
-    onBlur(e: any) {
+    blurTimer:any = null;
+    onBlur(e) {
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
+        // console.log(e.type);
         if (e.type == 'blur') {
-            setTimeout(() => {
+            this.blurTimer = setTimeout(() => {
                 this.setState({ matches: [] });
-            }, 200)
+                this.blurTimer = null;
+            }, 150)
+        }
+
+    }
+    focusInput() {
+        if (document.activeElement != this.input) {
+            if(this.blurTimer){
+                clearTimeout(this.blurTimer);
+            }
+            if(this.input){
+                this.input.focus();
+            }
         }
     }
     onInputFocus() {
         this.setState({ matches: this.props.items });
     }
     render(props: any, state: any) {
-        return <div class="choosy form-group" >
+        return <div class="choosy form-group" onClick={this.focusInput.bind(this)}>
             {props.label && <label>{props.label}</label>}
             {/* <Text linkTo={this} onChange={this.searchItems.bind(this)} name="q"/> */}
-            <input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} />
-            <div class="matches">
-                <ul>
-                    {/* ref={x => this.state.matchElements.push(x)} */}
-                    {this.state.matches?.map((m: Item, mi: number) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
-                </ul>
-            </div>
             <div class="selected">
                 <ul>
-                    {Array.from<any>(this.state.selected).map((x: Item, i: number) => <li>
+                    {Array.from(this.state.selected).map((x:any, i) => <li>
                         {x.name}
                         <Hidden name={props.name} value={x.value} />
-                        <a type="button" href="#" onClick={this.remove.bind(this, x)} aria-label="Remove Selection" title="Remove Selection"><span aria-hidden="true">x</span></a>
+                        <button onClick={this.remove.bind(this, x)} aria-label="Remove Selection" title="Remove Selection">x</button>
                     </li>)}
+		            <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
             </div>
+			<div class="matches">
+                <ul>
+                    {/* ref={x => this.state.matchElements.push(x)} */}
+                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
+                </ul>
+            </div>
+            
         </div>
     }
 }

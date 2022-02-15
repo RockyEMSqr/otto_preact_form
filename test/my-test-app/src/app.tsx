@@ -9,6 +9,8 @@ import { Text, Password, Textarea, Select, Address, SimpleModal } from '@emsquar
 import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
 import { FDate } from '../../../src/form/datetime';
+import { Choosy } from '../../../src/form/choosy';
+import '../../../src/form/style/_choosy.scss'
 export function App() {
   let [state, setState] = useState<{
     test1: '',
@@ -47,6 +49,7 @@ export function App() {
     <>
       <Tabs>
         <div label="Old Style With name Autocomplete">
+          <Choosy label="Choosy" items={[1,2,3,4,5,6].map(x=>({name:x, value:x}))}/>
           <SimpleModal useStyle>
             Hello
           </SimpleModal>
