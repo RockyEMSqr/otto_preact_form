@@ -177,7 +177,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
             <div class="matches">
                 <ul>
                     {/* ref={x => this.state.matchElements.push(x)} */}
-                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m == x) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
+                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m.value == x.value) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
                 </ul>
             </div>
 
