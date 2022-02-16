@@ -138,7 +138,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     onBlur(e) {
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
-        // console.log(e.type);
+        console.log(e.type);
         if (e.type == 'blur') {
             this.blurTimer = setTimeout(() => {
                 this.setState({ matches: [] });
@@ -174,12 +174,13 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
             </div>
+            {this.state.matches && this.state.matches.length > 0 && 
             <div class="matches">
                 <ul>
                     {/* ref={x => this.state.matchElements.push(x)} */}
                     {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m.value == x.value) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
                 </ul>
-            </div>
+            </div>}
 
         </div>
     }
