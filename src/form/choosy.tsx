@@ -140,10 +140,11 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         // possible ideas. blur on timer?
         // console.log(e.type);
         if (e.type == 'blur' || e.type == 'focusout') {
-            this.blurTimer = setTimeout(() => {
-                if (document.activeElement != this.input) {
-                    this.setState({ matches: [] });
-                    this.blurTimer = null;
+            let choosy = this;
+            this.blurTimer = setTimeout(function(){
+                if (document.activeElement != choosy.input) {
+                    choosy.setState({ matches: [] });
+                    choosy.blurTimer = null;
                 }
             }, 150)
         }
