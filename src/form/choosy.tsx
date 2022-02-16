@@ -141,21 +141,23 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         // console.log(e.type);
         if (e.type == 'blur' || e.type == 'focusout') {
             this.blurTimer = setTimeout(() => {
-                this.setState({ matches: [] });
-                this.blurTimer = null;
+                if (document.activeElement != this.input) {
+                    this.setState({ matches: [] });
+                    this.blurTimer = null;
+                }
             }, 150)
         }
 
     }
     focusInput() {
-        // if (document.activeElement != this.input) {
+        if (document.activeElement != this.input) {
             if (this.blurTimer) {
                 clearTimeout(this.blurTimer);
             }
             if (this.input) {
                 this.input.focus();
             }
-        // }
+        }
     }
     onInputFocus() {
         this.setState({ matches: this.props.items });
@@ -174,13 +176,13 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
             </div>
-            {this.state.matches && this.state.matches.length > 0 && 
-            <div class="matches">
-                <ul>
-                    {/* ref={x => this.state.matchElements.push(x)} */}
-                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m.value == x.value) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
-                </ul>
-            </div>}
+            {this.state.matches && this.state.matches.length > 0 &&
+                <div class="matches">
+                    <ul>
+                        {/* ref={x => this.state.matchElements.push(x)} */}
+                        {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m.value == x.value) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
+                    </ul>
+                </div>}
 
         </div>
     }
