@@ -1,10 +1,15 @@
 .choosy {
+    // background-color: #333;
     position: relative;
     display: inline-block;
     vertical-align: middle;
     font-size: 13px;
-    width: 350px;
+    // width: 350px;
+    * {
+        box-sizing: border-box;
+    }
     .selected {
+        position: relative;
         ul {
             position: relative;
             overflow: hidden;
@@ -27,9 +32,11 @@
             margin: 0;
             padding: 0;
             li {
+                float: left;
+                list-style: none;
                 position: relative;
                 margin: 3px 5px 3px 0;
-                padding: 3px 20px 3px 5px;
+                padding: 3px 30px 3px 5px;
                 border: 1px solid #aaa;
                 max-width: 100%;
                 border-radius: 3px;
@@ -52,16 +59,79 @@
                 color: #333;
                 line-height: 13px;
                 cursor: default;
-                button{
+                // height:25px;
+                button {
                     position: absolute;
-                    // top: 4px;
-                    right: 3px;
-                    // display: block;
+                    top: 0px;
+                    right: 0px;
+                    display: block;
+                    border: 0;
+                    cursor: pointer;
                     // width: 12px;
                     // height: 12px;
                     // background: url(chosen-sprite.png) -42px 1px no-repeat;
                     // font-size: 1px;
                 }
+                input {
+                    width: 50px;
+                    margin: 1px 0;
+                    padding: 0;
+                    // height: 25px;
+                    outline: 0;
+                    border: 0 !important;
+                    background: transparent !important;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                    color: #000;
+                    font-size: 100%;
+                    // font-family: sans-serif;
+                    line-height: normal;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+    .matches {
+        background-color: #000;
+        clip: auto;
+        -webkit-clip-path: none;
+        clip-path: none;
+        position: absolute;
+        top: 100%;
+        z-index: auto;
+        width: 100%;
+        border: 1px solid #aaa;
+        border-top: 0;
+        background: #fff;
+        -webkit-box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
+        box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
+        // clip: rect(0, 0, 0, 0);
+        // -webkit-clip-path: inset(100% 100%);
+        // clip-path: inset(100% 100%);
+        ul{
+            color: #444;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            margin: 0 4px 4px 0;
+            padding: 0 0 0 4px;
+            max-height: 240px;
+            -webkit-overflow-scrolling: touch;
+            li{
+                display: list-item;
+                cursor: pointer;
+                margin: 0;
+                padding: 5px 6px;
+                list-style: none;
+                line-height: 15px;
+                word-wrap: break-word;
+            }
+            .m-hover, li:hover{
+                background-color: #3875d7;
+                color: #fff;
+            }
+            .selected{
+                opacity: .5;
             }
         }
     }

@@ -7,7 +7,7 @@ export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
     items: Item[];
 }, {
     matches: Item[];
-    selected: Set<Item>;
+    selected: Item[];
     matchIndex: number;
 }> {
     type: string;

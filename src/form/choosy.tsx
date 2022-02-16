@@ -10,12 +10,12 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     items: Item[],
 }, {
     matches: Item[],
-    selected: Set<Item>,
+    selected: Item[],
     matchIndex: number,
 
 }> {
     type: string = 'choosy';
-    state = { items: [], matches: [], selected: new Set<any>(), matchIndex: 0 } as any;
+    state = { items: [], matches: [], selected: [], matchIndex: 0 } as any;
     input: HTMLInputElement | undefined | null;
     componentWillMount() {
         if (this.props.name && this.props.linkTo) {
@@ -32,14 +32,15 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         }
     }
     select(item: any, e: any) {
+        if (!this.state.selected.find(x => x == item)) {
+            this.state.selected.push(item);
 
-        this.state.selected.add(item);
-
-        this.setState(this.state);
-        if (!e.shiftKey) {
-            this.setState({ matches: [] })
-            if (this.input) {
-                this.input.value = '';
+            this.setState(this.state);
+            if (!e.shiftKey) {
+                this.setState({ matches: [] })
+                if (this.input) {
+                    this.input.value = '';
+                }
             }
         }
         this.onChange({});
@@ -67,7 +68,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     }
     onKeyDown(e: KeyboardEvent) {
         let mi = this.state.matchIndex;
-        let matches: Item[] = [];
+        let matches: Item[] = this.state.matches;
         if (e.keyCode == 38 || e.keyCode == 40) {
             e.preventDefault();
 
@@ -76,10 +77,10 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
 
                 mi++;
 
-                if (this.state.matches.length == 0) {
-                    matches = this.props.items;
-                    mi = 0;
-                }
+                // if (this.state.matches.length == 0) {
+                // matches = this.props.items;
+                // mi = 0;
+                // }
                 if (this.state.matchIndex > this.state.matches.length - 1) {
                     mi = 0;
                 }
@@ -110,6 +111,10 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         if (e.keyCode == 13) {
             e.preventDefault();
             this.select(this.state.matches[this.state.matchIndex], e);
+            matches = this.props.items;
+            if(this.input){
+                this.input.value = '';
+            }
         }
         // escape
         if (e.keyCode == 27) {
@@ -118,7 +123,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         this.setState({ ...this.state, matchIndex: mi, matches });
         return false;
     }
-    blurTimer:any = null;
+    blurTimer: any = null;
     onBlur(e) {
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
@@ -133,10 +138,10 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     }
     focusInput() {
         if (document.activeElement != this.input) {
-            if(this.blurTimer){
+            if (this.blurTimer) {
                 clearTimeout(this.blurTimer);
             }
-            if(this.input){
+            if (this.input) {
                 this.input.focus();
             }
         }
@@ -150,21 +155,21 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
             {/* <Text linkTo={this} onChange={this.searchItems.bind(this)} name="q"/> */}
             <div class="selected">
                 <ul>
-                    {Array.from(this.state.selected).map((x:any, i) => <li>
-                        {x.name}
+                    {Array.from(this.state.selected).map((x: any, i) => <li>
+                        <span>{x.name}</span>
                         <Hidden name={props.name} value={x.value} />
                         <button onClick={this.remove.bind(this, x)} aria-label="Remove Selection" title="Remove Selection">x</button>
                     </li>)}
-		            <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
+                    <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
             </div>
-			<div class="matches">
+            <div class="matches">
                 <ul>
                     {/* ref={x => this.state.matchElements.push(x)} */}
-                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
+                    {this.state.matches.map((m, mi) => <li class={'m ' + (this.state.matchIndex == mi ? 'm-hover' : 'active') + (this.state.selected.find(x => m == x) ? ' selected' : '')} onClick={this.select.bind(this, m)}>{m.name}</li>)}
                 </ul>
             </div>
-            
+
         </div>
     }
 }
