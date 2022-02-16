@@ -148,14 +148,14 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
 
     }
     focusInput() {
-        if (document.activeElement != this.input) {
+        // if (document.activeElement != this.input) {
             if (this.blurTimer) {
                 clearTimeout(this.blurTimer);
             }
             if (this.input) {
                 this.input.focus();
             }
-        }
+        // }
     }
     onInputFocus() {
         this.setState({ matches: this.props.items });
