@@ -15,7 +15,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
 
 }> {
     type: string = 'choosy';
-    state = { items: [], matches: [], selected: [], matchIndex: 0 } as any;
+    state = { items: [], matches: [], selected:[], matchIndex: 0 } as any;
     input: HTMLInputElement | undefined | null;
     componentWillMount() {
         if (this.props.name && this.props.linkTo) {
@@ -24,7 +24,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                 for (let id of selectedIds) {
                     let val = this.props.items.find(x => (typeof id == 'object') ? x.value == id.value : x.value == id);
                     if (val) {
-                        this.state.selected.add(val);
+                        this.state.selected.push(val);
                     }
                 }
             }
