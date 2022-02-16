@@ -32,7 +32,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         }
     }
     select(item: any, e: any) {
-        if (!this.state.selected.find(x => x == item)) {
+        if (!this.state.selected.find(x => x.value == item.value)) {
             this.state.selected.push(item);
 
             this.setState(this.state);
