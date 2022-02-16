@@ -16,7 +16,7 @@ export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
     componentWillMount(): void;
     select(item: any, e: any): void;
     onChange(e: any): void;
-    remove(i: Item, e: any): void;
+    remove(i: number, e: any): void;
     searchItems(e: any): void;
     onKeyDown(e: KeyboardEvent): boolean;
     blurTimer: any;

@@ -65,9 +65,9 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
             this.props.onChange(e);
         }
     }
-    remove(i: Item, e: any) {
+    remove(i: number, e: any) {
         e.preventDefault();
-        this.state.selected.delete(i);
+        this.state.selected.splice(i, 1);
         this.setState(this.state);
         this.onChange({});
     }
@@ -169,7 +169,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     {Array.from(this.state.selected).map((x: any, i) => <li>
                         <span>{x.name}</span>
                         <Hidden name={props.name} value={x.value} />
-                        <button onClick={this.remove.bind(this, x)} aria-label="Remove Selection" title="Remove Selection">x</button>
+                        <button onClick={this.remove.bind(this, i)} aria-label="Remove Selection" title="Remove Selection">x</button>
                     </li>)}
                     <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
