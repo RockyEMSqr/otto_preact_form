@@ -138,8 +138,8 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     onBlur(e) {
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
-        console.log(e.type);
-        if (e.type == 'blur') {
+        // console.log(e.type);
+        if (e.type == 'blur' || e.type == 'focusout') {
             this.blurTimer = setTimeout(() => {
                 this.setState({ matches: [] });
                 this.blurTimer = null;
