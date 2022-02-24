@@ -6,7 +6,8 @@ import { h } from 'preact';
  * multi select thingamajig
  */
 
-export class Choosy<T> extends Input<InputNameCheckProps<T> & {
+
+ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     items: Item[],
 }, {
     matches: Item[],
@@ -56,7 +57,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         }
         this.onChange({});
     }
-    onChange(e: any) {
+    async onChange(e: any) {
         if (this.props.linkTo) {
             dset(this.props.linkTo.state, this.props.name, this.state.selected);
             this.props.linkTo.setState(this.props.linkTo.state);
@@ -64,6 +65,9 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         if (this.props.onChange) {
             this.props.onChange(e);
         }
+		setTimeout(()=>{
+			this.focusInput();
+		}, 200);
     }
     remove(i: number, e: any) {
         e.preventDefault();
@@ -139,6 +143,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
         // console.log(e.type);
+		// e.preventDefault();
         if (e.type == 'blur' || e.type == 'focusout') {
             let choosy = this;
             this.blurTimer = setTimeout(function(){
@@ -146,11 +151,12 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     choosy.setState({ matches: [] });
                     choosy.blurTimer = null;
                 }
-            }, 150)
+            }, 200)
         }
 
     }
     focusInput() {
+		// console.log('focus', document.activeElement, this.input);
         if (document.activeElement != this.input) {
             if (this.blurTimer) {
                 clearTimeout(this.blurTimer);
@@ -171,11 +177,12 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                 <ul>
                     {Array.from(this.state.selected).map((x: any, i) => <li>
                         <span>{x.name}</span>
-                        <Hidden name={props.name} value={x.value} />
+                        <Hidden<void> name={props.name} value={x.value} />
                         <button onClick={this.remove.bind(this, i)} aria-label="Remove Selection" title="Remove Selection">x</button>
                     </li>)}
                     <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
                 </ul>
+                
             </div>
             {this.state.matches && this.state.matches.length > 0 &&
                 <div class="matches">

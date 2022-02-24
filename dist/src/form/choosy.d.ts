@@ -15,7 +15,7 @@ export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
     input: HTMLInputElement | undefined | null;
     componentWillMount(): void;
     select(item: any, e: any): void;
-    onChange(e: any): void;
+    onChange(e: any): Promise<void>;
     remove(i: number, e: any): void;
     searchItems(e: any): void;
     onKeyDown(e: KeyboardEvent): boolean;
