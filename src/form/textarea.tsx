@@ -1,8 +1,24 @@
 import { Input, InputNameCheckProps } from "./input";
 import { h } from 'preact'; // error using vite?
 export class Textarea<T> extends Input<InputNameCheckProps<T>>{
+
+    shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {
+        //todo(rc): why this always return true? Whats did it fix? what browser?
+        return true;
+    };
     te: HTMLTextAreaElement | undefined | null;
     type = "";
+
+    componentDidMount() {
+        if (this.te) {
+            this.te.value = this.getValue();
+        }
+    }
+    componentWillReceiveProps() {
+        if (this.te) {
+            this.te.value = this.getValue();
+        }
+    }
 
     getValue() {
         let val = super.getValue();
