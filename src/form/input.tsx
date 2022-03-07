@@ -10,32 +10,32 @@ export type Item = { name: any, value: any };
 type Decr = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 
-type NestedKeyOf<ObjectType extends object, N extends number = 4> =
-    { [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
-        ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key], Decr[N]>}`
-        : `${Key}`
-    }[keyof ObjectType & (string | number)];
+// type NestedKeyOf<ObjectType extends object, N extends number = 4> =
+//     { [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
+//         ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key], Decr[N]>}`
+//         : `${Key}`
+//     }[keyof ObjectType & (string | number)];
 
 type NotRecursiveKeyOf<ObjectType extends object> =
     { [Key in keyof ObjectType & (string | number)]:
         ObjectType[Key] extends object
-        ? `${Key}` | { [Key1 in keyof ObjectType[Key]  & (string | number)]:
+        ? `${Key}` | { [Key1 in keyof ObjectType[Key] & (string | number)]:
             ObjectType[Key][Key1] extends object
-            ?   `${Key}.${Key1}` | { 
-                [Key2 in keyof ObjectType[Key][Key1]  & (string | number)]:
+            ? `${Key}.${Key1}` | {
+                [Key2 in keyof ObjectType[Key][Key1] & (string | number)]:
                 ObjectType[Key][Key1][Key2] extends object
-                ?   `${Key}.${Key1}.${Key2}` | { 
-                    [Key3 in keyof ObjectType[Key][Key1][Key2]  & (string | number)]:
+                ? `${Key}.${Key1}.${Key2}` | {
+                    [Key3 in keyof ObjectType[Key][Key1][Key2] & (string | number)]:
                     ObjectType[Key][Key1][Key2] extends object
-                    ?   `${Key}.${Key1}.${Key2}.${Key3}` | 'Max Hit. Tell Rocky if you need more'
-                   :  `${Key}.${Key1}.${Key2}.${Key3}`
+                    ? `${Key}.${Key1}.${Key2}.${Key3}` | 'Max Hit. Tell Rocky if you need more'
+                    : `${Key}.${Key1}.${Key2}.${Key3}`
                 }[keyof ObjectType[Key][Key1][Key2] & (string | number)]
-               :  `${Key}.${Key1}.${Key2}`
+                : `${Key}.${Key1}.${Key2}`
             }[keyof ObjectType[Key][Key1] & (string | number)]
-           :  `${Key}.${Key1}`
-        }[keyof ObjectType[Key] & (string | number)]  
-    : `${Key}`
-}[keyof ObjectType & (string | number)];
+            : `${Key}.${Key1}`
+        }[keyof ObjectType[Key] & (string | number)]
+        : `${Key}`
+    }[keyof ObjectType & (string | number)];
 
 type Join<K, P> = K extends string | number ?
     P extends string | number ?
@@ -68,7 +68,7 @@ export abstract class Input<P = {}, S = {}> extends Component<
     abstract type: string;
     prepend: undefined | string | JSX.Element;
     append: undefined | string | JSX.Element;
-    inp: HTMLInputElement | undefined | null;
+    inp: HTMLInputElement | HTMLSelectElement | undefined | null;
     getValue() {
         if (this.state.value) {
             return this.state.value;

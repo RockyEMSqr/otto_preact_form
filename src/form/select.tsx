@@ -36,7 +36,7 @@ export class Select<T> extends Input<InputNameCheckProps<T> & { addDefaultBlankT
         return <div class="form-group">
             <label class={this.labelClass} for={this.id}>{this.label}</label>
             <div class={"select-style " + this.inputClass}>
-                <select {...attributes} disabled={props.disabled} required={props.required} onChange={this.getOnChange()} name={props.name} class={this.inputClass}>
+                <select ref={x => this.inp = x} {...attributes} disabled={props.disabled} required={props.required} onChange={this.getOnChange()} name={props.name} class={this.inputClass}>
                     {items.map(x => <option selected={this.isSelected(x.value)} value={x.value}>{x.name}</option>)}
                 </select>
             </div>

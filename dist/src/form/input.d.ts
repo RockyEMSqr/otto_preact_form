@@ -35,7 +35,7 @@ export declare abstract class Input<P = {}, S = {}> extends Component<AllInputPr
     abstract type: string;
     prepend: undefined | string | JSX.Element;
     append: undefined | string | JSX.Element;
-    inp: HTMLInputElement | undefined | null;
+    inp: HTMLInputElement | HTMLSelectElement | undefined | null;
     getValue(): any;
     getOnChange(): ((e: any, o1?: any) => void) | (<TEvent extends Event = Event>(e: TEvent) => void) | undefined;
     getOnInput(): ((e: any) => void) | undefined;
