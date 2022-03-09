@@ -13,10 +13,19 @@ export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
     type: string;
     state: any;
     input: HTMLInputElement | undefined | null;
+    thewindowClickHandler: (e: any) => void;
+    thewindowFocusInHandler: (e: any) => void;
+    /**
+     *
+     */
+    constructor();
     componentWillMount(): void;
-    select(item: any, e: any): void;
+    componentWillUnmount(): void;
+    windowFocusInHandler(e: any): void;
+    windowClickHandler(e: any): void;
+    select(item: any, e?: any): void;
     onChange(e: any): Promise<void>;
-    remove(i: number, e: any): void;
+    remove(i: number, e: Event): void;
     searchItems(e: any): void;
     onKeyDown(e: KeyboardEvent): boolean;
     blurTimer: any;
