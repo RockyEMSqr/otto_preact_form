@@ -18,6 +18,17 @@ import { h } from 'preact';
     type: string = 'choosy';
     state = { items: [], matches: [], selected: [], matchIndex: 0 } as any;
     input: HTMLInputElement | undefined | null;
+     thewindowClickHandler: (e: any) => void;
+     thewindowFocusInHandler: (e: any) => void;
+     /**
+      *
+      */
+     constructor() {
+         super();
+         this.thewindowFocusInHandler = this.windowFocusInHandler.bind(this);
+         this.thewindowClickHandler = this.windowClickHandler.bind(this);
+ 
+     }
     componentWillMount() {
         if (this.props.name && this.props.linkTo) {
             let selectedIds = delve(this.props.linkTo.state, this.props.name);
@@ -42,18 +53,52 @@ import { h } from 'preact';
                 }
             }
         }
+
+        window.addEventListener('focusin', this.thewindowFocusInHandler);
+        window.addEventListener('click', this.thewindowClickHandler);
     }
-    select(item: any, e: any) {
+    componentWillUnmount(){
+        window.removeEventListener('focusin', this.thewindowFocusInHandler);
+        window.removeEventListener('click', this.thewindowClickHandler);
+    }
+    windowFocusInHandler(e){
+        if(e.target != this.input){
+            this.blurTimer = null;
+            this.setState({matches:[]})
+        }
+    }
+    windowClickHandler(e){
+        
+        //check if element clicked was part of choosy.
+        // if not close it
+        let childOfChoosy = false;
+        // @ts-ignore
+        let parent = e.target.parentElement;
+        while(parent){
+            if(parent == this.base){
+                childOfChoosy = true;
+                break;
+            }
+            parent = parent.parentElement;
+        }
+        if(!childOfChoosy){
+            // console.log('ChildofChoosy', childOfChoosy);
+            this.blurTimer = null;
+            this.setState({matches:[]})
+        }
+    }
+    select(item: any, e?: any) {
+        e.stopImmediatePropagation();
         if (!this.state.selected.find(x => x.value == item.value)) {
             this.state.selected.push(item);
 
             this.setState(this.state);
-            if (!e.shiftKey) {
-                this.setState({ matches: [] })
-                if (this.input) {
-                    this.input.value = '';
-                }
-            }
+            // if (!e.shiftKey) {
+            //     this.setState({ matches: [] })
+            //     if (this.input) {
+            //         this.input.value = '';
+            //     }
+            // }
         }
         this.onChange({});
     }
@@ -69,8 +114,9 @@ import { h } from 'preact';
 			this.focusInput();
 		}, 200);
     }
-    remove(i: number, e: any) {
+    remove(i: number, e: Event) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         this.state.selected.splice(i, 1);
         this.setState(this.state);
         this.onChange({});
@@ -151,7 +197,7 @@ import { h } from 'preact';
                     choosy.setState({ matches: [] });
                     choosy.blurTimer = null;
                 }
-            }, 200)
+            }, 300)
         }
 
     }
