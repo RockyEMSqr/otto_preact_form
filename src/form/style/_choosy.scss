@@ -31,6 +31,15 @@
             list-style: none;
             margin: 0;
             padding: 0;
+            li.input{
+                border:none;
+                background: transparent;
+                margin:2px;
+                padding:3px 10px;
+            }
+            li.input>span:focus-visible{
+                outline:none;
+            } 
             li {
                 float: left;
                 list-style: none;

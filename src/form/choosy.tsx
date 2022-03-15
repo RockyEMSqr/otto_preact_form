@@ -7,7 +7,7 @@ import { h } from 'preact';
  */
 
 
- export class Choosy<T> extends Input<InputNameCheckProps<T> & {
+export class Choosy<T> extends Input<InputNameCheckProps<T> & {
     items: Item[],
 }, {
     matches: Item[],
@@ -18,17 +18,19 @@ import { h } from 'preact';
     type: string = 'choosy';
     state = { items: [], matches: [], selected: [], matchIndex: 0 } as any;
     input: HTMLInputElement | undefined | null;
-     thewindowClickHandler: (e: any) => void;
-     thewindowFocusInHandler: (e: any) => void;
-     /**
-      *
-      */
-     constructor() {
-         super();
-         this.thewindowFocusInHandler = this.windowFocusInHandler.bind(this);
-         this.thewindowClickHandler = this.windowClickHandler.bind(this);
- 
-     }
+    thewindowClickHandler: (e: any) => void;
+    thewindowFocusInHandler: (e: any) => void;
+    theFakeInputHandler: (e: any) => void;
+    /**
+     *
+     */
+    constructor() {
+        super();
+        this.thewindowFocusInHandler = this.windowFocusInHandler.bind(this);
+        this.thewindowClickHandler = this.windowClickHandler.bind(this);
+        this.theFakeInputHandler = this.fakeinputHandler.bind(this);
+
+    }
     componentWillMount() {
         if (this.props.name && this.props.linkTo) {
             let selectedIds = delve(this.props.linkTo.state, this.props.name);
@@ -57,34 +59,42 @@ import { h } from 'preact';
         window.addEventListener('focusin', this.thewindowFocusInHandler);
         window.addEventListener('click', this.thewindowClickHandler);
     }
-    componentWillUnmount(){
+    fakeinputHandler(e){
+        e.target.value = this.input?.innerText;
+        this.searchItems(e);
+    }
+    componentDidMount() {
+        this.input?.addEventListener("input", this.theFakeInputHandler, false);
+    }
+    componentWillUnmount() {
         window.removeEventListener('focusin', this.thewindowFocusInHandler);
         window.removeEventListener('click', this.thewindowClickHandler);
+        this.input?.removeEventListener("input", this.theFakeInputHandler);
     }
-    windowFocusInHandler(e){
-        if(e.target != this.input){
+    windowFocusInHandler(e) {
+        if (e.target != this.input) {
             this.blurTimer = null;
-            this.setState({matches:[]})
+            this.setState({ matches: [] })
         }
     }
-    windowClickHandler(e){
-        
+    windowClickHandler(e) {
+
         //check if element clicked was part of choosy.
         // if not close it
         let childOfChoosy = false;
         // @ts-ignore
         let parent = e.target.parentElement;
-        while(parent){
-            if(parent == this.base){
+        while (parent) {
+            if (parent == this.base) {
                 childOfChoosy = true;
                 break;
             }
             parent = parent.parentElement;
         }
-        if(!childOfChoosy){
+        if (!childOfChoosy) {
             // console.log('ChildofChoosy', childOfChoosy);
             this.blurTimer = null;
-            this.setState({matches:[]})
+            this.setState({ matches: [] })
         }
     }
     select(item: any, e?: any) {
@@ -95,12 +105,16 @@ import { h } from 'preact';
             this.setState(this.state);
             if (!e.shiftKey) {
                 this.setState({ matches: [] })
-                if (this.input) {
-                    this.input.value = '';
-                }
+                this.clearInput();
             }
         }
         this.onChange({});
+    }
+    clearInput() {
+        if (this.input) {
+            this.input.value = '';
+            this.input.innerText = '';
+        }
     }
     async onChange(e: any) {
         if (this.props.linkTo) {
@@ -110,9 +124,9 @@ import { h } from 'preact';
         if (this.props.onChange) {
             this.props.onChange(e);
         }
-		// setTimeout(()=>{
-		// 	this.focusInput();
-		// }, 200);
+        // setTimeout(()=>{
+        // 	this.focusInput();
+        // }, 200);
     }
     remove(i: number, e: Event) {
         e.preventDefault();
@@ -128,6 +142,7 @@ import { h } from 'preact';
         this.setState({ matches, matchIndex: 0 });
     }
     onKeyDown(e: KeyboardEvent) {
+        // console.log(e);
         let mi = this.state.matchIndex;
         let matches: Item[] = this.state.matches;
         if (e.keyCode == 38 || e.keyCode == 40) {
@@ -144,6 +159,9 @@ import { h } from 'preact';
                 // }
                 if (this.state.matchIndex > this.state.matches.length - 1) {
                     mi = 0;
+                }
+                if (mi == 0 && matches.length == 0) {
+                    matches = this.props.items;
                 }
 
             }
@@ -172,10 +190,8 @@ import { h } from 'preact';
         if (e.keyCode == 13) {
             e.preventDefault();
             this.select(this.state.matches[this.state.matchIndex], e);
-            matches = this.props.items;
-            if (this.input) {
-                this.input.value = '';
-            }
+            this.clearInput();
+            matches = [];
         }
         // escape
         if (e.keyCode == 27) {
@@ -189,12 +205,13 @@ import { h } from 'preact';
         //todo(rc): when selecting, blur fires first and never selects the item. 
         // possible ideas. blur on timer?
         // console.log(e.type);
-		// e.preventDefault();
+        // e.preventDefault();
         if (e.type == 'blur' || e.type == 'focusout') {
             let choosy = this;
-            this.blurTimer = setTimeout(function(){
+            this.blurTimer = setTimeout(function () {
                 if (document.activeElement != choosy.input) {
                     choosy.setState({ matches: [] });
+                    choosy.clearInput();
                     choosy.blurTimer = null;
                 }
             }, 300)
@@ -202,7 +219,7 @@ import { h } from 'preact';
 
     }
     focusInput() {
-		// console.log('focus', document.activeElement, this.input);
+        // console.log('focus', document.activeElement, this.input);
         if (document.activeElement != this.input) {
             if (this.blurTimer) {
                 clearTimeout(this.blurTimer);
@@ -226,9 +243,20 @@ import { h } from 'preact';
                         <Hidden<void> name={props.name} value={x.value} />
                         <button onClick={this.remove.bind(this, i)} aria-label="Remove Selection" title="Remove Selection">x</button>
                     </li>)}
-                    <li><input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /></li>
+                    <li class="input">
+                        {/* <input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /> */}
+                        <span
+                        // @ts-ignore
+                            ref={x => this.input = x}
+                            contentEditable={true}
+                            onInput={this.searchItems.bind(this)}
+                            onBlur={this.onBlur.bind(this)}
+                            onFocus={this.onInputFocus.bind(this)}
+                            onKeyDown={this.onKeyDown.bind(this)}
+                        ></span>
+                    </li>
                 </ul>
-                
+
             </div>
             {this.state.matches && this.state.matches.length > 0 &&
                 <div class="matches">
