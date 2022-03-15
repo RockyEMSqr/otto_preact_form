@@ -93,12 +93,12 @@ import { h } from 'preact';
             this.state.selected.push(item);
 
             this.setState(this.state);
-            // if (!e.shiftKey) {
-            //     this.setState({ matches: [] })
-            //     if (this.input) {
-            //         this.input.value = '';
-            //     }
-            // }
+            if (!e.shiftKey) {
+                this.setState({ matches: [] })
+                if (this.input) {
+                    this.input.value = '';
+                }
+            }
         }
         this.onChange({});
     }
@@ -110,9 +110,9 @@ import { h } from 'preact';
         if (this.props.onChange) {
             this.props.onChange(e);
         }
-		setTimeout(()=>{
-			this.focusInput();
-		}, 200);
+		// setTimeout(()=>{
+		// 	this.focusInput();
+		// }, 200);
     }
     remove(i: number, e: Event) {
         e.preventDefault();
