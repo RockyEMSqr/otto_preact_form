@@ -11,6 +11,7 @@
     .selected {
         position: relative;
         ul {
+            min-height:2em;
             position: relative;
             overflow: hidden;
             margin: 0;
