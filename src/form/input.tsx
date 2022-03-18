@@ -135,13 +135,18 @@ export abstract class Input<P = {}, S = {}> extends Component<
         return this.props.id || this.props.name;
     }
     render(props?: any, state?: any) {
-        let attributes = { ...props, linkTo: null }
+        let attributes = { ...props, linkTo: null, label: null }
+        let placeholder = props.placeholder;
+
+        if (!placeholder && typeof props.label == 'string') {
+            placeholder = props.label;
+        }
         return (
             <div class="form-group">
                 {this.label && <label for={this.id} class={this.labelClass}>{this.label}</label>}
                 <div class="input-group">
                     {this.prepend}
-                    <input {...attributes} ref={x => this.inp = x} onChange={this.getOnChange()} onInput={this.getOnInput()} value={this.getValue()} type={this.type} class={this.inputClass} name={props?.name} id={this.id} placeholder={this.label} />
+                    <input {...attributes} ref={x => this.inp = x} onChange={this.getOnChange()} onInput={this.getOnInput()} value={this.getValue()} type={this.type} class={this.inputClass} name={props?.name} id={this.id} placeholder={placeholder} />
                     {this.append}
                 </div>
             </div>
