@@ -40,6 +40,9 @@
                 padding:3px 10px;
                 -webkit-box-shadow: none;
                 box-shadow: none;
+                span{
+                    display: inline-block;
+                }
             }
             li.input>span:focus-visible{
                 outline:none;
@@ -49,7 +52,7 @@
                 list-style: none;
                 position: relative;
                 margin: 3px 5px;
-                padding: 3px 30px 3px 5px;
+                padding: 3px 15px 3px 5px;
                 border: 1px solid #aaa;
                 max-width: 100%;
                 border-radius: 3px;

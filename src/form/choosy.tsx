@@ -139,6 +139,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         let val = e.target.value;
         let regex = new RegExp('.*' + val + '.*', 'ig');
         let matches = this.props.items.filter(x => regex.test(x.name));
+        console.log(matches)
         this.setState({ matches, matchIndex: 0 });
     }
     onKeyDown(e: KeyboardEvent) {
@@ -241,7 +242,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     {Array.from(this.state.selected).map((x: any, i) => <li>
                         <span>{x.name}</span>
                         <Hidden<void> name={props.name} value={x.value} />
-                        <button onClick={this.remove.bind(this, i)} aria-label="Remove Selection" title="Remove Selection">x</button>
+                        <button onClick={this.remove.bind(this, i)} aria-label="Remove Selection" title="Remove Selection">×</button>
                     </li>)}
                     <li class="input">
                         {/* <input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /> */}
