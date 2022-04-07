@@ -19,7 +19,8 @@ interface ModalProps {
     useStyle?: boolean,
     label?: string,
     modalStyle?: any,
-    style?: string
+    style?: string,
+    buttonTabIndex?:number
 }
 interface ModalState {
     open: any,
@@ -81,8 +82,8 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
         if (this.props.noLabel) {
             return null;
         }
-        let buttonText = label || "Open"
-        return <button type="button" onClick={this.toggleOpen.bind(this)}>{buttonText}</button>
+        let buttonText = label || "Open";
+        return <button {...this.props.buttonTabIndex ? ({tabindex:this.props.buttonTabIndex}) : null} type="button" onClick={this.toggleOpen.bind(this)}>{buttonText}</button>
     }
 
     /** Default behavior on clicking background - go through Cancel workflow */

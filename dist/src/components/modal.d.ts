@@ -10,6 +10,7 @@ interface ModalProps {
     label?: string;
     modalStyle?: any;
     style?: string;
+    buttonTabIndex?: number;
 }
 interface ModalState {
     open: any;

@@ -5,7 +5,8 @@ import { Tabs } from '../../../src/components/tabs';
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 // import { CheckName, get, Text } from '@emsquared/otto_preact_form/src/form/sandbox/textTest';
-import { Text, Password, Textarea, Select, Address, SimpleModal } from '@emsquared/otto_preact_form';
+import { Text, Password, Textarea, Select, Address } from '../../../';
+import {SimpleModal} from '../../../src/components/modal';
 import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
 import { FDate } from '../../../src/form/datetime';
@@ -50,7 +51,7 @@ export function App() {
       <Tabs>
         <div label="Old Style With name Autocomplete">
           <Choosy label="Choosy" name="foo" value={1} items={[1,2,3,4,5,6, 'asdf', '3456t4gf', 'asdf4rgfasert', 'asdfaw345ewf'].map(x=>({name:x, value:x}))}/>
-          <SimpleModal useStyle>
+          <SimpleModal buttonTabIndex={-1} useStyle>
             Hello
           </SimpleModal>
           <pre>STATE:{JSON.stringify(state)}</pre>
