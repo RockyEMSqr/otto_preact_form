@@ -10,7 +10,7 @@ export declare class TypeAhead<T = {}> extends Component<{
     display?: (i: T) => any;
 }, {
     results: T[];
-    selected: T;
+    selected: T | null;
     value: string;
 }> {
     state: {
@@ -19,6 +19,7 @@ export declare class TypeAhead<T = {}> extends Component<{
         value: string;
     };
     input: any;
+    constructor(props: any, ctx: any);
     componentDidMount(): void;
     getResults(str: any): Promise<void>;
     keyUp(e: any): Promise<void>;
