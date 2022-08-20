@@ -20,7 +20,7 @@ interface ModalProps {
     label?: string,
     modalStyle?: any,
     style?: string,
-    buttonTabIndex?:number
+    buttonTabIndex?: number
 }
 interface ModalState {
     open: any,
@@ -83,7 +83,7 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
             return null;
         }
         let buttonText = label || "Open";
-        return <button {...this.props.buttonTabIndex ? ({tabindex:this.props.buttonTabIndex}) : null} type="button" onClick={this.toggleOpen.bind(this)}>{buttonText}</button>
+        return <button {...this.props.buttonTabIndex ? ({ tabindex: this.props.buttonTabIndex }) : null} type="button" onClick={this.toggleOpen.bind(this)}>{buttonText}</button>
     }
 
     /** Default behavior on clicking background - go through Cancel workflow */
@@ -204,7 +204,8 @@ export abstract class ConfirmCloseModal extends Component<any, any> {
 
     abstract render(props?, state?)
 }
-export class SimpleModal<P = {}, S = {}> extends BaseModal<P, S> {
+export class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps,
+    S & ModalState> {
     renderModalContent() {
         return <div>
             <button onClick={this.toggleOpen.bind(this)} style="position:absolute; top:5px; right:5px;">X</button>
