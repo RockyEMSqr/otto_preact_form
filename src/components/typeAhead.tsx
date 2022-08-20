@@ -11,10 +11,13 @@ export class TypeAhead<T = {}> extends Component<{
     label: string,
     onSelect: (x) => void,
     display?: (i: T) => any
-}, { results: T[], selected: T, value: string }> {
+}, { results: T[], selected: T|null, value: string }> {
 
     state = { results: [], selected: null, value: '' }
     input;
+    constructor(props, ctx) {
+        super(props, ctx);
+    }
     componentDidMount() {
         this.setState({ value: this.props.value })
     }

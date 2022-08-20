@@ -234,10 +234,10 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         this.setState({ matches: this.props.items });
     }
     render(props: any, state: any) {
-        return <div class="choosy form-group" onClick={this.focusInput.bind(this)}>
+        return <div class={"choosy form-group " + (this.props.required ? 'required' : '')} onClick={this.focusInput.bind(this)}>
             {props.label && <label>{props.label}</label>}
             {/* <Text linkTo={this} onChange={this.searchItems.bind(this)} name="q"/> */}
-            <div class="selected">
+            <div class={"selected " + (this.props.required ? 'required' : '')}>
                 <ul>
                     {Array.from(this.state.selected).map((x: any, i) => <li>
                         <span>{x.name}</span>
@@ -246,7 +246,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     </li>)}
                     <li class="input">
                         {/* <input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /> */}
-                        <span
+                        <span class={this.props.required ? 'required' : ''}
                         // @ts-ignore
                             ref={x => this.input = x}
                             contentEditable={true}

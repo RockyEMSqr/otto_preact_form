@@ -20,4 +20,5 @@ export * from './src/components/loadingComponent';
 export * from './src/components/modal';
 export * from './src/components/page';
 export * from './src/components/tabs';
+export * from './src/components/typeAhead';
 export * from './src/hooks';
