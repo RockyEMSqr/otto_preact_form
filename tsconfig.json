@@ -8,7 +8,7 @@
       "ESNext"
     ],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -21,9 +21,13 @@
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "dist/tsc",
+    "skipDefaultLibCheck": true
+    
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["**/sandbox/**", "node_modules"]
 }

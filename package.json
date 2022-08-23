@@ -2,19 +2,15 @@
   "name": "@emsquared/otto_preact_form",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "type":"module",
+  "main": "dist/index.cjs",
   "module": "dist/index.module.js",
   "umd:main": "dist/index.umd.js",
   "unpkg": "dist/index.min.js",
   "source": "index.ts",
   "exports": {
-		".": {
-			"types": "./src/index.d.ts",
-			"browser": "./dist/index.module.js",
-			"umd": "./dist/index.umd.js",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
-		}
+    "require": "./dist/index.cjs",      
+    "default": "./dist/index.modern.js" 
   },
   "directories": {
     "test": "test"
@@ -45,6 +41,7 @@
   "devDependencies": {
     "@types/dlv": "^1.1.2",
     "luxon": "^2.2.0",
-    "microbundle": "^0.14.2"
+    "microbundle": "^0.14.2",
+    "typescript": "^4.7.4"
   }
 }
