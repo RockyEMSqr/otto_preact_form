@@ -7,16 +7,17 @@ import { h } from 'preact';
  */
 
 
-export class Choosy<T> extends Input<InputNameCheckProps<T> & {
+export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
     items: Item[],
 }, {
     matches: Item[],
     selected: Item[],
     matchIndex: number,
+    classes:string[]
 
 }> {
     type: string = 'choosy';
-    state = { items: [], matches: [], selected: [], matchIndex: 0 } as any;
+    state = { classes:[] as string[], items: [] as Item[], matches: [] as Item[], selected: [] as Item[], matchIndex: 0 };
     input: HTMLInputElement | undefined | null;
     thewindowClickHandler: (e: any) => void;
     thewindowFocusInHandler: (e: any) => void;
@@ -32,6 +33,12 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
 
     }
     componentWillMount() {
+        this.state.classes.push('choosy');
+        this.state.classes.push('form-group');
+        if(this.props.required){
+            this.state.classes.push('required')
+            this.state.classes.push('invalid')
+        }
         if (this.props.name && this.props.linkTo) {
             let selectedIds = delve(this.props.linkTo.state, this.props.name);
             if (selectedIds) {
@@ -101,6 +108,9 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         e.stopImmediatePropagation();
         if (!this.state.selected.find(x => x.value == item.value)) {
             this.state.selected.push(item);
+            if(this.props.required){
+                this.state.classes.splice(this.state.classes.indexOf('invalid'), 1)
+            }
 
             this.setState(this.state);
             if (!e.shiftKey) {
@@ -132,6 +142,9 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         e.preventDefault();
         e.stopImmediatePropagation();
         this.state.selected.splice(i, 1);
+        if(this.state.selected.length == 0 && this.props.required){
+            this.state.classes.push('invalid')
+        }
         this.setState(this.state);
         this.onChange({});
     }
@@ -234,10 +247,10 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
         this.setState({ matches: this.props.items });
     }
     render(props: any, state: any) {
-        return <div class={"choosy form-group " + (this.props.required ? 'required' : '')} onClick={this.focusInput.bind(this)}>
+        return <div class={this.state.classes.join(' ')} onClick={this.focusInput.bind(this)}>
             {props.label && <label>{props.label}</label>}
             {/* <Text linkTo={this} onChange={this.searchItems.bind(this)} name="q"/> */}
-            <div class={"selected " + (this.props.required ? 'required' : '')}>
+            <div class="selected">
                 <ul>
                     {Array.from(this.state.selected).map((x: any, i) => <li>
                         <span>{x.name}</span>
@@ -246,7 +259,7 @@ export class Choosy<T> extends Input<InputNameCheckProps<T> & {
                     </li>)}
                     <li class="input">
                         {/* <input autocomplete="off" onBlur={this.onBlur.bind(this)} onKeyDown={this.onKeyDown.bind(this)} onFocus={this.onInputFocus.bind(this)} type="text" name="q" ref={x => this.input = x} onInput={this.searchItems.bind(this)} /> */}
-                        <span class={this.props.required ? 'required' : ''}
+                        <span
                         // @ts-ignore
                             ref={x => this.input = x}
                             contentEditable={true}
