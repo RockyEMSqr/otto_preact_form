@@ -12,7 +12,7 @@
 // export * from './src/form/phone';
 // export * from './src/form/radio';
 // export * from './src/form/select';
-// export * from './src/form/text';
+export * from './src/form/text';
 // export * from './src/form/textarea';
 // export * from './src/form/datetime';
 // export * from './src/form/richTextEditor';
