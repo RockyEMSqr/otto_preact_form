@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES6",
     "useDefineForClassFields": true,
     "lib": [
       "DOM",
@@ -23,7 +23,8 @@
     "jsxFragmentFactory": "Fragment",
     "noImplicitAny": false,
     "outDir": "dist/tsc",
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "noEmitOnError": false
     
   },
   "include": [
