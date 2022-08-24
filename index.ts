@@ -26,4 +26,4 @@ export * from './src/components/typeAhead';
 
 
 export * from './src/hooks';
-// export default {};
+export default {};

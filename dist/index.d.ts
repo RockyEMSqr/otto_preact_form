@@ -22,3 +22,5 @@ export * from './src/components/page';
 export * from './src/components/tabs';
 export * from './src/components/typeAhead';
 export * from './src/hooks';
+declare const _default: {};
+export default _default;
