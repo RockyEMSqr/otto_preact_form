@@ -6,7 +6,7 @@
   "module": "dist/index.module.js",
   "umd:main": "dist/index.umd.js",
   "unpkg": "dist/index.min.js",
-  "source": "index.tsx",
+  "source": "index.ts",
   "directories": {
     "test": "test"
   },
@@ -30,8 +30,7 @@
     "formdata-polyfill": "^4.0.10",
     "linkstate": "^2.0.1",
     "preact": "^10.6.4",
-    "preact-richtextarea": "^1.2.1",
-    "ts-toolbelt": "^9.6.0"
+    "preact-richtextarea": "^1.2.1"
   },
   "devDependencies": {
     "@types/dlv": "^1.1.2",
