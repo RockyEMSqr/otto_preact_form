@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { DateTime } from 'luxon';
-import { Input, InputNameCheckProps } from '../../index';
+import { Input, InputNameCheckProps } from "./input";
 export declare abstract class DTInput<T> extends Input<InputNameCheckProps<T>> {
     getDT(val: number | string | Date | undefined): DateTime | undefined;
     getValue(): string | undefined;

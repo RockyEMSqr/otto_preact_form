@@ -1,7 +1,7 @@
 import { h, Component, render } from 'preact';
 // @ts-ignore
 import RichTextArea from 'preact-richtextarea';
-import { Input, InputNameCheckProps } from '../../index';
+import { Input, InputNameCheckProps } from './input';
 import { dset } from '../utils';
 export class RichTextEditor<T> extends Input<InputNameCheckProps<T>, any>{
     type: string = "";
