@@ -26,6 +26,7 @@
 
 
 // export * from './src/hooks';
-import {Text} from './src/form/text';
-export {Text};
-export default {Text};
+import {h} from 'preact';
+export function Boo(){
+    return <div>Boo! Scared You</div>
+}

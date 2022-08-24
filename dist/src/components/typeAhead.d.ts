@@ -14,8 +14,8 @@ export declare class TypeAhead<T = {}> extends Component<{
     value: string;
 }> {
     state: {
-        results: never[];
-        selected: null;
+        results: any[];
+        selected: any;
         value: string;
     };
     input: any;

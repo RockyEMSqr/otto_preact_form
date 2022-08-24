@@ -48,7 +48,7 @@ export declare abstract class BaseModal<P = {}, S = {}> extends Component<P & Mo
     */
     abstract renderModalContent(props?: any, state?: any): any;
     /** Render a button to open. Provides a button by default - just pass in a 'label' prop to replace it */
-    openButton(label: any): h.JSX.Element | null;
+    openButton(label: any): h.JSX.Element;
     /** Default behavior on clicking background - go through Cancel workflow */
     onBackgroundClick(data?: any): void;
     /** Keep click event from going through the modal foreground */
@@ -62,7 +62,7 @@ export declare abstract class BaseModal<P = {}, S = {}> extends Component<P & Mo
     open(): void;
     close(): void;
     toggleOpen(): void;
-    _renderModal(props: any, state: any): import("preact").VNode<any> | undefined;
+    _renderModal(props: any, state: any): import("preact").VNode<any>;
     render(props: any, state: any): h.JSX.Element;
 }
 /** Basic modal structure that handles confirm/close */

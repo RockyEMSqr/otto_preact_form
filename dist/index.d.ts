@@ -1,6 +1,2 @@
-import { Text } from './src/form/text';
-export { Text };
-declare const _default: {
-    Text: typeof Text;
-};
-export default _default;
+import { h } from 'preact';
+export declare function Boo(): h.JSX.Element;

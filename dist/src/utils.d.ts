@@ -1,12 +1,12 @@
 export declare function dset(obj: any, keys: string | any, val: any): void;
 export declare function addBlankDefaultToItems(items: any[], defaultText?: string): {
-    name: string | undefined;
+    name: string;
     value: string;
 }[];
 /**
  * todo(rc): needs to be better
  */
-export declare function formatPhoneNumber(s: string): string | null;
+export declare function formatPhoneNumber(s: string): string;
 import dlv from 'dlv';
 export declare function delve(object: object, key: string | Array<string | number>, defaultValue?: any): any;
 export declare const dget: typeof dlv;

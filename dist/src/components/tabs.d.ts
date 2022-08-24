@@ -2,8 +2,8 @@ import { h, Component } from "preact";
 export declare class Tabs extends Component<any, any> {
     state: {
         selectedI: number;
-        buttons: never[];
-        selectedContent: null;
+        buttons: any[];
+        selectedContent: any;
     };
     onTabButtonClick(index: any): Promise<void>;
     createTheGoods(props: any): void;

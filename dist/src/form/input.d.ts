@@ -37,13 +37,13 @@ export declare abstract class Input<P = {}, S = {}> extends Component<AllInputPr
     append: undefined | string | JSX.Element;
     inp: HTMLInputElement | HTMLSelectElement | undefined | null;
     getValue(): any;
-    getOnChange(): ((e: any, o1?: any) => void) | (<TEvent extends Event = Event>(e: TEvent) => void) | undefined;
-    getOnInput(): ((e: any) => void) | undefined;
-    get label(): string | h.JSX.Element | undefined;
-    get isRequired(): boolean | undefined;
+    getOnChange(): (e: any, o1?: any) => void;
+    getOnInput(): (e: any) => void;
+    get label(): string | h.JSX.Element;
+    get isRequired(): boolean;
     get inputClass(): string;
     get labelClass(): "" | "required";
-    get id(): string | undefined;
+    get id(): string;
     render(props?: any, state?: any): h.JSX.Element;
 }
 export {};
