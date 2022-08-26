@@ -21,6 +21,7 @@ export declare class TypeAhead<T = {}> extends Component<{
     input: any;
     constructor(props: any, ctx: any);
     componentDidMount(): void;
+    componentWillReceiveProps(nextProps: any): void;
     getResults(str: any): Promise<void>;
     keyUp(e: any): Promise<void>;
     clear(e: any): void;

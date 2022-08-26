@@ -21,6 +21,9 @@ export class TypeAhead<T = {}> extends Component<{
     componentDidMount() {
         this.setState({ value: this.props.value })
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({ value: nextProps.value })
+    }
     async getResults(str) {
         let results = await this.props.getResults(str);
         this.setState({ results });
