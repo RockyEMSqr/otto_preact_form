@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import 'formdata-polyfill';
 export declare class Form extends Component<any, any> {
     formData(form: HTMLFormElement): FormData;
     formDataToJSON(form: HTMLFormElement): {};
