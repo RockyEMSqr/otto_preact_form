@@ -1,4 +1,4 @@
-import { h, Component } from "preact";
+import { h, Component, JSX } from "preact";
 interface ModalProps {
     noLabel?: boolean;
     onConfirm?: (data: any) => void;
@@ -7,7 +7,7 @@ interface ModalProps {
     open?: boolean;
     selector?: string;
     useStyle?: boolean;
-    label?: string;
+    label?: string | JSX.Element;
     modalStyle?: any;
     style?: string;
     buttonTabIndex?: number;

@@ -51,7 +51,7 @@ export function App() {
       <Tabs>
         <div label="Old Style With name Autocomplete">
           <Choosy label="Choosy" name="foo" value={1} items={[1, 2, 3, 4, 5, 6, 'asdf', '3456t4gf', 'asdf4rgfasert', 'asdfaw345ewf'].map(x => ({ name: x, value: x }))} />
-          <SimpleModal buttonTabIndex={-1} useStyle>
+          <SimpleModal buttonTabIndex={-1} useStyle label={<span>Hi</span>}>
             Hello
           </SimpleModal>
           <pre>STATE:{JSON.stringify(state)}</pre>
