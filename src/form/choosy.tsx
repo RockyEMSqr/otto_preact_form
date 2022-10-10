@@ -108,9 +108,9 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
         e.stopImmediatePropagation();
         if (!this.state.selected.find(x => x.value == item.value)) {
             this.state.selected.push(item);
-            if(this.props.required){
-                this.state.classes.splice(this.state.classes.indexOf('invalid'), 1)
-            }
+            // if(this.props.required){
+            //     this.state.classes.splice(this.state.classes.indexOf('invalid'), 1)
+            // }
 
             this.setState(this.state);
             if (!e.shiftKey) {
@@ -142,9 +142,9 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
         e.preventDefault();
         e.stopImmediatePropagation();
         this.state.selected.splice(i, 1);
-        if(this.state.selected.length == 0 && this.props.required){
-            this.state.classes.push('invalid')
-        }
+        // if(this.state.selected.length == 0 && this.props.required){
+        //     this.state.classes.push('invalid')
+        // }
         this.setState(this.state);
         this.onChange({});
     }
