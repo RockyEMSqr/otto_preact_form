@@ -71,7 +71,7 @@ export class Address<T> extends Component<AllInputProps<InputNameCheckProps<T>>,
             <Text required={this.props.required} linkTo={this.props.linkTo} label="Street" name={`${this.getNamePrefix()}street`} inputClass="long" />
             <div class="multi-input">
                 <Text required={this.props.required} linkTo={this.props.linkTo} label="City" name={`${this.getNamePrefix()}city`} />
-                <Select addDefaultBlankToItems required={this.props.required} items={([] as any).concat(usStates)} linkTo={this.props.linkTo} label="State" name={`${this.getNamePrefix()}state`} />
+                <Select addDefaultBlankToItems="State" required={this.props.required} items={([] as any).concat(usStates)} linkTo={this.props.linkTo} label="State" name={`${this.getNamePrefix()}state`} />
                 <Text required={this.props.required} linkTo={this.props.linkTo} label="Zip" name={`${this.getNamePrefix()}zip`} inputClass="short" />
             </div>
         </div>;
