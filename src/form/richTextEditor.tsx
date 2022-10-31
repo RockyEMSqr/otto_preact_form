@@ -3,7 +3,7 @@ import { h, Component, render } from 'preact';
 import RichTextArea from 'preact-richtextarea';
 import { Input, InputNameCheckProps } from './input';
 import { dset } from '../utils';
-export class RichTextEditor<T> extends Input<InputNameCheckProps<T>, any>{
+export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & {toolbarAdditions?:any}, any>{
     type: string = "";
     editor: RichTextArea;
     exec(c: string, v?: any) {
@@ -57,9 +57,12 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T>, any>{
         return <div class="form-group orte">
             {this.label && <label for={this.id} class={this.labelClass}>{this.label}</label>}
             <div class="input-group">
-                <div class="rte-toolbar">{Object.keys(this.actions).map(k => <button type="button"
-                    class={this.actions[k].on && this.actions[k].on() ? 'on' : ''}
-                    onClick={this.actions[k].exec}>{this.actions[k].button}</button>)}</div>
+                <div class="rte-toolbar">
+                    {Object.keys(this.actions).map(k => <button type="button"
+                        class={this.actions[k].on && this.actions[k].on() ? 'on' : ''}
+                        onClick={this.actions[k].exec}>{this.actions[k].button}</button>)}
+                    {this.props.toolbarAdditions && <div class="rte-toolbar-additions">{this.props.toolbarAdditions}</div>}
+                </div>
                 <RichTextArea ref={(x: any) => this.editor = x}
                     onMouseUp={this.checkCommands.bind(this)}
                     onInput={this.onInput.bind(this)}
