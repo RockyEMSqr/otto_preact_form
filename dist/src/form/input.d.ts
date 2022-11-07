@@ -17,6 +17,7 @@ export declare type InputProps = {
     onClick?: (e: any, o1?: any) => void;
     onInput?: (e: any) => void;
     label?: string | JSX.Element;
+    wrapperClass?: string;
 };
 export declare type AllInputProps<P> = P & InputProps & Pick<JSX.HTMLAttributes, Exclude<keyof JSX.HTMLAttributes, keyof InputProps>>;
 export declare type InputState = {
@@ -35,5 +36,7 @@ export declare abstract class Input<P = {}, S = {}> extends Component<AllInputPr
     get inputClass(): string;
     get labelClass(): "" | "required";
     get id(): string;
+    get wrapperClass(): string;
+    get inputWrapperClass(): string;
     render(props?: any, state?: any): h.JSX.Element;
 }
