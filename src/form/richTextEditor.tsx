@@ -17,15 +17,15 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & { toolbarA
         this.editor.getDocument().body.innerHTML = '';
     }
     override componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & { toolbarAdditions?: any; }>>, nextContext: any): void {        
-        if(this.props.linkTo){
-            let val = dget(this.props.linkTo.state, this.props.name);
+        // if(this.props.linkTo){
+        //     let val = dget(this.props.linkTo.state, this.props.name);
 
-            this.setState({ value:  val});
-            this.editor.getDocument().body.innerHTML = val;
-        }{
-            this.setState({ value:  nextProps.value});
+        //     this.setState({ value:  val});
+        //     this.editor.getDocument().body.innerHTML = val;
+        // }{
+        //     this.setState({ value:  nextProps.value});
             
-        }
+        // }
     }
     actions: { [key: string]: any; } = {
         bold: { exec: () => this.exec('bold'), on: () => this.qcs('bold'), button: <b>B</b> },
