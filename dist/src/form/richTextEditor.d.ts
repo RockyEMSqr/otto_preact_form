@@ -8,6 +8,7 @@ export declare class RichTextEditor<T> extends Input<InputNameCheckProps<T> & {
     editor: RichTextArea;
     exec(c: string, v?: any): void;
     qcs(c: string): any;
+    clear(): void;
     componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & {
         toolbarAdditions?: any;
     }>>, nextContext: any): void;

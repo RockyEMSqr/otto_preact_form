@@ -13,14 +13,15 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & { toolbarA
     qcs(c: string) {
         return this.editor && this.editor.queryCommandState(c);
     }
-    override componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & { toolbarAdditions?: any; }>>, nextContext: any): void {
-        
+    clear(){
+        this.editor.getDocument().body.innerHTML = '';
+    }
+    override componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & { toolbarAdditions?: any; }>>, nextContext: any): void {        
         if(this.props.linkTo){
             let val = dget(this.props.linkTo.state, this.props.name);
-            // console.log('DGETVAL', val);
-            // console.log(this.editor);
-            // this.editor.forceUpdate();
+
             this.setState({ value:  val});
+            this.editor.getDocument().body.innerHTML = val;
         }{
             this.setState({ value:  nextProps.value});
             
