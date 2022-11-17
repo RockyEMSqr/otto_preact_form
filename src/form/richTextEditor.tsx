@@ -14,6 +14,7 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & { toolbarA
         return this.editor && this.editor.queryCommandState(c);
     }
     clear(){
+        this.setState({ value: '' });
         this.editor.getDocument().body.innerHTML = '';
     }
     override componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & { toolbarAdditions?: any; }>>, nextContext: any): void {        
