@@ -1,9 +1,9 @@
 import { h, Component, render } from 'preact';
 // @ts-ignore
 import RichTextArea from 'preact-richtextarea';
-import { Input, InputNameCheckProps } from './input';
-import { dset } from '../utils';
-export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & {toolbarAdditions?:any}, any>{
+import { AllInputProps, Input, InputNameCheckProps } from './input';
+import { dget, dset } from '../utils';
+export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & { toolbarAdditions?: any }, any>{
     type: string = "";
     editor: RichTextArea;
     exec(c: string, v?: any) {
@@ -12,6 +12,19 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & {toolbarAd
     }
     qcs(c: string) {
         return this.editor && this.editor.queryCommandState(c);
+    }
+    override componentWillReceiveProps(nextProps: Readonly<AllInputProps<InputNameCheckProps<T> & { toolbarAdditions?: any; }>>, nextContext: any): void {
+        
+        if(this.props.linkTo){
+            let val = dget(this.props.linkTo.state, this.props.name);
+            // console.log('DGETVAL', val);
+            // console.log(this.editor);
+            // this.editor.forceUpdate();
+            this.setState({ value:  val});
+        }{
+            this.setState({ value:  nextProps.value});
+            
+        }
     }
     actions: { [key: string]: any; } = {
         bold: { exec: () => this.exec('bold'), on: () => this.qcs('bold'), button: <b>B</b> },
