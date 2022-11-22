@@ -83,7 +83,7 @@ export class RichTextEditor<T> extends Input<InputNameCheckProps<T> & { toolbarA
                     onInput={this.onInput.bind(this)}
                     value={this.getValue()}
                     id={this.id} />
-                <input type="hidden" name={props.name} value={this.state.value} />
+                <input type="hidden" name={props.name} value={this.getValue()} />
             </div>
         </div>;
     }
