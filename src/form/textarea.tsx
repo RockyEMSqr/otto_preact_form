@@ -32,7 +32,7 @@ export class Textarea<T> extends Input<InputNameCheckProps<T>>{
         let cols = props.cols || null;
         return <div class="form-group vertical-top">
             <label for={this.props.name} class={this.labelClass}>{this.props.label}</label>
-            <textarea disabled={props.disabled} value={this.getValue()} ref={x => this.te = x} autocomplete="off" onInput={this.getOnChange()} required={this.props.required} name={this.props.name} onChange={this.getOnChange()} class={this.inputClass} rows={rows} cols={cols}></textarea>
+            <textarea placeholder={props.placeholder} disabled={props.disabled} value={this.getValue()} ref={x => this.te = x} autocomplete="off" onInput={this.getOnChange()} required={this.props.required} name={this.props.name} onChange={this.getOnChange()} class={this.inputClass} rows={rows} cols={cols}></textarea>
         </div>
     }
 }
