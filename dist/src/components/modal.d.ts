@@ -75,7 +75,9 @@ export declare abstract class ConfirmCloseModal extends Component<any, any> {
     cancel(): Promise<void>;
     abstract render(props?: any, state?: any): any;
 }
-export declare class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps, S & ModalState> {
+export declare class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps & {
+    dismissible?: boolean;
+}, S & ModalState> {
     renderModalContent(): h.JSX.Element;
 }
 export {};

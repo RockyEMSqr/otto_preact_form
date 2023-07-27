@@ -204,11 +204,11 @@ export abstract class ConfirmCloseModal extends Component<any, any> {
 
     abstract render(props?, state?)
 }
-export class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps,
+export class SimpleModal<P={}, S = {}> extends BaseModal<P & ModalProps & {dismissible?:boolean},
     S & ModalState> {
     renderModalContent() {
         return <div>
-            <button onClick={this.toggleOpen.bind(this)} style="position:absolute; top:5px; right:5px;">X</button>
+            {(this.props.dismissible !== false) && <button onClick={this.toggleOpen.bind(this)} style="position:absolute; top:5px; right:5px;">X</button>}
             {this.props.children}
         </div>;
     }
