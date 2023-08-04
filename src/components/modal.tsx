@@ -20,7 +20,8 @@ interface ModalProps {
     label?: string | JSX.Element,
     modalStyle?: any,
     style?: string,
-    buttonTabIndex?: number
+    buttonTabIndex?: number,
+    backgroundClass?:string
 }
 interface ModalState {
     open: any,
@@ -114,11 +115,19 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
 
     // Can override these to customize classes
     getBackgroundClass() {
-        return `modal-background`
+        let classes = ['modal-background'];
+        if(this.props.backgroundClass){
+            classes.push(this.props.backgroundClass);
+        }
+        return classes.join(' ');
     }
 
     getModalClass() {
-        return `modal-box ${this.props.class}`
+        let classes = ['modal-box'];
+        if(this.props.backgroundClass){
+            classes.push(this.props.class);
+        }
+        return classes.join(' ');
     }
 
     // =======================================================================

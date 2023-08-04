@@ -11,6 +11,7 @@ interface ModalProps {
     modalStyle?: any;
     style?: string;
     buttonTabIndex?: number;
+    backgroundClass?: string;
 }
 interface ModalState {
     open: any;
