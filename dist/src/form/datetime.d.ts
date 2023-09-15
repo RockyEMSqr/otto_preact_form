@@ -1,7 +1,10 @@
 import { h } from 'preact';
 import { DateTime } from 'luxon';
 import { Input, InputNameCheckProps } from "./input";
-export declare abstract class DTInput<T> extends Input<InputNameCheckProps<T>> {
+export declare abstract class DTInput<T> extends Input<InputNameCheckProps<T> & {
+    maxDate?: Date;
+    maxTime?: Date;
+}> {
     getDT(val: number | string | Date | undefined): DateTime | undefined;
     getValue(): string;
     onChangeCB: any;

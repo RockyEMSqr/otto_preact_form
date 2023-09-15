@@ -9,7 +9,7 @@ import { Text, Password, Textarea, Select, Address } from '../../../';
 import { SimpleModal } from '../../../src/components/modal';
 import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
-import { FDate } from '../../../src/form/datetime';
+import { FDate, FDateTime } from '../../../src/form/datetime';
 import { Choosy } from '../../../src/form/choosy';
 import {RichTextEditor} from '../../../src/form/richTextEditor'
 import '../../../src/form/style/_choosy.scss'
@@ -51,6 +51,7 @@ export function App() {
     <>
       <Tabs>
       <div label="Rich Text Editor Set State Later">
+        <FDateTime maxDate={new Date()} maxTime={new Date()} />
         <RichTextEditor linkTo={LT} name="test1"/>
         <button onClick={e=>setState(x=>({...x, test1:'asdfasdfasdf'}))}>Set Test1 in State To Something</button>
         <button onClick={e=>setState(x=>({...x, test1:''}))}>Clear</button>
