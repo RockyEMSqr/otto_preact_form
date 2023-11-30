@@ -31,7 +31,9 @@ export declare type AllInputProps<P> = P & InputProps & Pick<JSX.HTMLAttributes,
 export declare type InputState = {
     value?: any;
 };
-export declare abstract class Input<P = {}, S = {}> extends Component<AllInputProps<P>, S & InputState> {
+export declare abstract class Input<P = {}, S = {}> extends Component<AllInputProps<P> & {
+    inputStyle?: string;
+}, S & InputState> {
     abstract type: string;
     prepend: undefined | string | JSX.Element;
     append: undefined | string | JSX.Element;
