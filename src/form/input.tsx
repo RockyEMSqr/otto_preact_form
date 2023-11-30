@@ -1,12 +1,12 @@
 import { render, Component, h } from 'preact';
 // import linkState from 'linkstate';
-function linkState(component, key, eventPath?) {
+function linkState(component: { __lsc?: any, state: any, setState: (s: any) => void }, key: string, eventPath?: any) {
     let path = key.split('.'),
         cache = component.__lsc || (component.__lsc = {});
 
-    return cache[key + eventPath] || (cache[key + eventPath] = function (e) {
+    return cache[key + eventPath] || (cache[key + eventPath] = function (e: Event) {
         let t = e && e.target || this,
-            state = {},
+            state: any = {},
             obj = state,
             v = typeof eventPath === 'string' ? delve(e, eventPath) : (t && t.nodeName) ? (t.type.match(/^che|rad/) ? t.checked : t.value) : e,
             i = 0;
@@ -167,7 +167,7 @@ export abstract class Input<P = {}, S = {}> extends Component<
     }
     get inputWrapperClass() {
         let classes = [];
-        if(this.prepend || this.append){
+        if (this.prepend || this.append) {
             classes.push('input-group');
         }
         return classes.join(' ');
@@ -185,7 +185,7 @@ export abstract class Input<P = {}, S = {}> extends Component<
                 {this.label && <label for={this.id} class={this.labelClass}>{this.label}</label>}
                 <div class={this.inputWrapperClass}>
                     {this.prepend}
-                    <input {...attributes} ref={x => this.inp = x} onChange={this.getOnChange()} onInput={this.getOnInput()} value={this.getValue()} type={this.type} class={this.inputClass} name={props?.name} id={this.id} placeholder={placeholder} />
+                    <input style={this.props.inputStyle} {...attributes} ref={x => this.inp = x} onChange={this.getOnChange()} onInput={this.getOnInput()} value={this.getValue()} type={this.type} class={this.inputClass} name={props?.name} id={this.id} placeholder={placeholder} />
                     {this.append}
                 </div>
             </div>
