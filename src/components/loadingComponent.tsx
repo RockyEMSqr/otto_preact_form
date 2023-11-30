@@ -1,6 +1,6 @@
 import { h, Component, ComponentChild } from 'preact';
 export abstract class LoadingComponent<P, S extends { loading: boolean }> extends Component<P, S & { loading: boolean }> {
-    state = { loading: true } as any;
+    state = { loading: true } as S & { loading: boolean };
     constructor(props: P, ctx: any) {
         super(props, ctx);
 

@@ -1,13 +1,29 @@
 import { render, Component, h } from 'preact';
-import linkState from 'linkstate';
+// import linkState from 'linkstate';
+function linkState(component, key, eventPath?) {
+    let path = key.split('.'),
+        cache = component.__lsc || (component.__lsc = {});
 
+    return cache[key + eventPath] || (cache[key + eventPath] = function (e) {
+        let t = e && e.target || this,
+            state = {},
+            obj = state,
+            v = typeof eventPath === 'string' ? delve(e, eventPath) : (t && t.nodeName) ? (t.type.match(/^che|rad/) ? t.checked : t.value) : e,
+            i = 0;
+        for (; i < path.length - 1; i++) {
+            obj = obj[path[i]] || (obj[path[i]] = !i && component.state[path[i]] || {});
+        }
+        obj[path[i]] = v;
+        component.setState(state);
+    });
+}
 
 import { JSXInternal as JSX } from 'preact/src/jsx';
 import { delve } from '../utils';
 
 export type Item = { name: any, value: any };
 
-type Decr = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// type Decr = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 
 // type NestedKeyOf<ObjectType extends object, N extends number = 4> =
@@ -37,29 +53,38 @@ type NotRecursiveKeyOf<ObjectType extends object> =
         : `${Key}`
     }[keyof ObjectType & (string | number)];
 
-type Join<K, P> = K extends string | number ?
-    P extends string | number ?
-    `${K}${"" extends P ? "" : "."}${P}`
-    : never : never;
-type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...0[]]
-type Paths<T, D extends number = 10> = [D] extends [never] ? never :
-    T extends void ? 'Boo' :
-    T extends never ? 'Boo' :
-    T extends object ?
-    { [K in keyof T]-?: K extends string | number ?
-        `${K}` | Join<K, Paths<T[K], Prev[D]>>
-        : never
-    }[keyof T] : ""
+// type Join<K, P> = K extends string | number ?
+//     P extends string | number ?
+//     `${K}${"" extends P ? "" : "."}${P}`
+//     : never : never;
+// type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+//     11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...0[]]
+// type Paths<T, D extends number = 10> = [D] extends [never] ? never :
+//     T extends void ? 'Boo' :
+//     T extends never ? 'Boo' :
+//     T extends object ?
+//     { [K in keyof T]-?: K extends string | number ?
+//         `${K}` | Join<K, Paths<T[K], Prev[D]>>
+//         : never
+//     }[keyof T] : ""
 
-type Leaves<T = void, D extends number = 5> = [D] extends [never] ? never :
-    T extends object ?
-    { [K in keyof T]-?: Join<K, Leaves<T[K], Prev[D]>> }[keyof T] : string;
+// type Leaves<T = void, D extends number = 5> = [D] extends [never] ? never :
+//     T extends object ?
+//     { [K in keyof T]-?: Join<K, Leaves<T[K], Prev[D]>> }[keyof T] : string;
 export type InputNameCheckProps<T = void> = {
-    name?: T extends void ? string :
-    T extends Object ? NotRecursiveKeyOf<T> : string;//Paths<T>
+    name?: string
+    //  T extends void ? string :
+    // T extends Object ? NotRecursiveKeyOf<T> : string;//Paths<T>
 }
-export type InputProps = { linkTo?: { state: any, setState: any }, inputClass?: string, onChange?: (e: any, o1?: any) => void, onClick?: (e: any, o1?: any) => void, onInput?: (e: any) => void, label?: string | JSX.Element };
+export type InputProps = {
+    linkTo?: { state: any, setState: any },
+    inputClass?: string,
+    onChange?: (e: any, o1?: any) => void,
+    onClick?: (e: any, o1?: any) => void,
+    onInput?: (e: any) => void,
+    label?: string | JSX.Element
+    wrapperClass?: string
+};
 export type AllInputProps<P> = P & InputProps
     & Pick<JSX.HTMLAttributes, Exclude<keyof JSX.HTMLAttributes, keyof InputProps>>;
 export type InputState = { value?: any }
@@ -136,6 +161,17 @@ export abstract class Input<P = {}, S = {}> extends Component<
     public get id() {
         return this.props.id || this.props.name;
     }
+    get wrapperClass() {
+        let classes = ['form-group', this.props.wrapperClass]
+        return classes.join(' ');
+    }
+    get inputWrapperClass() {
+        let classes = [];
+        if(this.prepend || this.append){
+            classes.push('input-group');
+        }
+        return classes.join(' ');
+    }
     render(props?: any, state?: any) {
         let attributes = { ...props, linkTo: null, label: null }
         let placeholder = props.placeholder;
@@ -143,10 +179,11 @@ export abstract class Input<P = {}, S = {}> extends Component<
         if (!placeholder && typeof props.label == 'string') {
             placeholder = props.label;
         }
+
         return (
-            <div class="form-group">
+            <div class={this.wrapperClass}>
                 {this.label && <label for={this.id} class={this.labelClass}>{this.label}</label>}
-                <div class="input-group">
+                <div class={this.inputWrapperClass}>
                     {this.prepend}
                     <input {...attributes} ref={x => this.inp = x} onChange={this.getOnChange()} onInput={this.getOnInput()} value={this.getValue()} type={this.type} class={this.inputClass} name={props?.name} id={this.id} placeholder={placeholder} />
                     {this.append}

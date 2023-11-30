@@ -1,4 +1,4 @@
-import { h, Component } from "preact";
+import { h, Component, JSX } from "preact";
 // console.log(h)
 // @ts-ignore
 // if(!global.h){
@@ -17,10 +17,11 @@ interface ModalProps {
     open?: boolean,
     selector?: string,
     useStyle?: boolean,
-    label?: string,
+    label?: string | JSX.Element,
     modalStyle?: any,
     style?: string,
-    buttonTabIndex?: number
+    buttonTabIndex?: number,
+    backgroundClass?:string
 }
 interface ModalState {
     open: any,
@@ -114,11 +115,19 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
 
     // Can override these to customize classes
     getBackgroundClass() {
-        return `modal-background`
+        let classes = ['modal-background'];
+        if(this.props.backgroundClass){
+            classes.push(this.props.backgroundClass);
+        }
+        return classes.join(' ');
     }
 
     getModalClass() {
-        return `modal-box ${this.props.class}`
+        let classes = ['modal-box'];
+        if(this.props.backgroundClass){
+            classes.push(this.props.class);
+        }
+        return classes.join(' ');
     }
 
     // =======================================================================
@@ -204,11 +213,11 @@ export abstract class ConfirmCloseModal extends Component<any, any> {
 
     abstract render(props?, state?)
 }
-export class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps,
+export class SimpleModal<P={}, S = {}> extends BaseModal<P & ModalProps & {dismissible?:boolean},
     S & ModalState> {
     renderModalContent() {
         return <div>
-            <button onClick={this.toggleOpen.bind(this)} style="position:absolute; top:5px; right:5px;">X</button>
+            {(this.props.dismissible !== false) && <button onClick={this.toggleOpen.bind(this)} style="position:absolute; top:5px; right:5px;">X</button>}
             {this.props.children}
         </div>;
     }

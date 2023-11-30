@@ -9,16 +9,17 @@ import { Text, Password, Textarea, Select, Address } from '../../../';
 import { SimpleModal } from '../../../src/components/modal';
 import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
 import { StateType } from './types'
-import { FDate } from '../../../src/form/datetime';
+import { FDate, FDateTime } from '../../../src/form/datetime';
 import { Choosy } from '../../../src/form/choosy';
+import {RichTextEditor} from '../../../src/form/richTextEditor'
 import '../../../src/form/style/_choosy.scss'
 export function App() {
   let [state, setState] = useState<{
-    test1: '',
+    test1: string,
     test: '',
     tttteeesssttt: '',
     p: { x: 1, y: 1, z: 1 }
-  }>({} as any)
+  }>({test1:'FOOFOOFOO'} as any)
   let [s1, ss1] = useState<StateType>({} as StateType);
   let idks: StateType = {
     a: 'asdf'
@@ -49,9 +50,18 @@ export function App() {
   return (
     <>
       <Tabs>
+      <div label="Rich Text Editor Set State Later">
+        <FDateTime maxDate={new Date()} maxTime={new Date()} />
+        <RichTextEditor linkTo={LT} name="test1"/>
+        <button onClick={e=>setState(x=>({...x, test1:'asdfasdfasdf'}))}>Set Test1 in State To Something</button>
+        <button onClick={e=>setState(x=>({...x, test1:''}))}>Clear</button>
+      </div>
+      <div label="Read only">
+        <Select disabled={true} readOnly={true} readonly={true} label="Select" addDefaultBlankToItems items={[111111,222222,333333,4444444].map(x=>({name:x, value:x}))}/>
+        </div>
         <div label="Old Style With name Autocomplete">
           <Choosy label="Choosy" name="foo" value={1} items={[1, 2, 3, 4, 5, 6, 'asdf', '3456t4gf', 'asdf4rgfasert', 'asdfaw345ewf'].map(x => ({ name: x, value: x }))} />
-          <SimpleModal buttonTabIndex={-1} useStyle>
+          <SimpleModal buttonTabIndex={-1} useStyle label={<span>Hi</span>}>
             Hello
           </SimpleModal>
           <pre>STATE:{JSON.stringify(state)}</pre>

@@ -3,15 +3,22 @@ import { h } from 'preact';
 /**
  * multi select thingamajig
  */
-export declare class Choosy<T> extends Input<InputNameCheckProps<T> & {
+export declare class Choosy<T = {}> extends Input<InputNameCheckProps<T> & {
     items: Item[];
 }, {
     matches: Item[];
     selected: Item[];
     matchIndex: number;
+    classes: string[];
 }> {
     type: string;
-    state: any;
+    state: {
+        classes: string[];
+        items: Item[];
+        matches: Item[];
+        selected: Item[];
+        matchIndex: number;
+    };
     input: HTMLInputElement | undefined | null;
     thewindowClickHandler: (e: any) => void;
     thewindowFocusInHandler: (e: any) => void;

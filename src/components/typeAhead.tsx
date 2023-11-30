@@ -21,6 +21,9 @@ export class TypeAhead<T = {}> extends Component<{
     componentDidMount() {
         this.setState({ value: this.props.value })
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({ value: nextProps.value })
+    }
     async getResults(str) {
         let results = await this.props.getResults(str);
         this.setState({ results });
@@ -40,10 +43,10 @@ export class TypeAhead<T = {}> extends Component<{
     select(thing, e: Event) {
         let selected = thing;
         if (selected) {
+            this.setState({ results: [], value: this.props.display ? this.props.display(selected) : '' });
             if (this.props.onSelect) {
                 this.props.onSelect(selected);
             }
-            this.setState({ results: [], value: this.props.display ? this.props.display(selected) : '' });
         }
     }
     async toggleList(e) {

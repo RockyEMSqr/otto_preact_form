@@ -1,4 +1,4 @@
-import { h, Component } from "preact";
+import { h, Component, JSX } from "preact";
 interface ModalProps {
     noLabel?: boolean;
     onConfirm?: (data: any) => void;
@@ -7,10 +7,11 @@ interface ModalProps {
     open?: boolean;
     selector?: string;
     useStyle?: boolean;
-    label?: string;
+    label?: string | JSX.Element;
     modalStyle?: any;
     style?: string;
     buttonTabIndex?: number;
+    backgroundClass?: string;
 }
 interface ModalState {
     open: any;
@@ -48,7 +49,7 @@ export declare abstract class BaseModal<P = {}, S = {}> extends Component<P & Mo
     */
     abstract renderModalContent(props?: any, state?: any): any;
     /** Render a button to open. Provides a button by default - just pass in a 'label' prop to replace it */
-    openButton(label: any): h.JSX.Element | null;
+    openButton(label: any): h.JSX.Element;
     /** Default behavior on clicking background - go through Cancel workflow */
     onBackgroundClick(data?: any): void;
     /** Keep click event from going through the modal foreground */
@@ -62,7 +63,7 @@ export declare abstract class BaseModal<P = {}, S = {}> extends Component<P & Mo
     open(): void;
     close(): void;
     toggleOpen(): void;
-    _renderModal(props: any, state: any): import("preact").VNode<any> | undefined;
+    _renderModal(props: any, state: any): import("preact").VNode<any>;
     render(props: any, state: any): h.JSX.Element;
 }
 /** Basic modal structure that handles confirm/close */
@@ -75,7 +76,9 @@ export declare abstract class ConfirmCloseModal extends Component<any, any> {
     cancel(): Promise<void>;
     abstract render(props?: any, state?: any): any;
 }
-export declare class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps, S & ModalState> {
+export declare class SimpleModal<P = {}, S = {}> extends BaseModal<P & ModalProps & {
+    dismissible?: boolean;
+}, S & ModalState> {
     renderModalContent(): h.JSX.Element;
 }
 export {};

@@ -14,13 +14,14 @@ export declare class TypeAhead<T = {}> extends Component<{
     value: string;
 }> {
     state: {
-        results: never[];
-        selected: null;
+        results: any[];
+        selected: any;
         value: string;
     };
     input: any;
     constructor(props: any, ctx: any);
     componentDidMount(): void;
+    componentWillReceiveProps(nextProps: any): void;
     getResults(str: any): Promise<void>;
     keyUp(e: any): Promise<void>;
     clear(e: any): void;

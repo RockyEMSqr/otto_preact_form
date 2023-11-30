@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import 'formdata-polyfill';
+// import 'formdata-polyfill';
 import { dset } from '../utils';
 import delve from 'dlv';
 export class Form extends Component<any, any>{

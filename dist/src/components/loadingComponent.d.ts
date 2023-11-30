@@ -4,7 +4,9 @@ export declare abstract class LoadingComponent<P, S extends {
 }> extends Component<P, S & {
     loading: boolean;
 }> {
-    state: any;
+    state: S & {
+        loading: boolean;
+    };
     constructor(props: P, ctx: any);
     abstract loadData(): Promise<void>;
     dataDidLoad(): Promise<void>;
