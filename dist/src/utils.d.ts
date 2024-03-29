@@ -4,6 +4,7 @@ export declare function addBlankDefaultToItems(items: any[], defaultText?: strin
     value: string;
     disabled: boolean;
     selected: boolean;
+    hidden: boolean;
 }[];
 /**
  * todo(rc): needs to be better

@@ -5,6 +5,7 @@ export declare type Item = {
     value: any;
     disabled?: boolean;
     selected?: boolean;
+    hidden?: boolean;
 };
 export declare type InputNameCheckProps<T = void> = {
     name?: string;
