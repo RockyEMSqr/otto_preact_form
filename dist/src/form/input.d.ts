@@ -3,6 +3,7 @@ import { JSXInternal as JSX } from 'preact/src/jsx';
 export declare type Item = {
     name: any;
     value: any;
+    disabled?: boolean;
 };
 export declare type InputNameCheckProps<T = void> = {
     name?: string;

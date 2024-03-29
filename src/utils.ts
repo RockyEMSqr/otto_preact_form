@@ -7,7 +7,7 @@ export function dset(obj: any, keys: string | any, val: any) {
     }
 }
 export function addBlankDefaultToItems(items: any[], defaultText?: string) {
-    return [{ name: defaultText, value: '' }].concat(items);
+    return [{ name: defaultText, value: '', disabled:true }].concat(items);
 }
 /**
  * todo(rc): needs to be better

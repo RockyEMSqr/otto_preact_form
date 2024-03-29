@@ -21,7 +21,7 @@ function linkState(component: { __lsc?: any, state: any, setState: (s: any) => v
 import { JSXInternal as JSX } from 'preact/src/jsx';
 import { delve } from '../utils';
 
-export type Item = { name: any, value: any };
+export type Item = { name: any, value: any, disabled?:boolean };
 
 // type Decr = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

@@ -2,6 +2,7 @@ export declare function dset(obj: any, keys: string | any, val: any): void;
 export declare function addBlankDefaultToItems(items: any[], defaultText?: string): {
     name: string;
     value: string;
+    disabled: boolean;
 }[];
 /**
  * todo(rc): needs to be better
