@@ -7,7 +7,7 @@ import { useState } from 'preact/hooks';
 // import { CheckName, get, Text } from '@emsquared/otto_preact_form/src/form/sandbox/textTest';
 import { Text, Password, Textarea, Select, Address } from '../../../';
 import { SimpleModal } from '../../../src/components/modal';
-import { useLinkTo } from '@emsquared/otto_preact_form/src/hooks';
+import { useLinkTo } from '../../../src/hooks';
 import { StateType } from './types'
 import { FDate, FDateTime } from '../../../src/form/datetime';
 import { Choosy } from '../../../src/form/choosy';
