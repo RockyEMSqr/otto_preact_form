@@ -50,6 +50,10 @@ export function App() {
   return (
     <>
       <Tabs>
+        <div label="Choosy">
+        <Choosy label="Choosy" name="foo" value={1} items={['Violin', "Viola", 'Vandolin', `Voice`, 'Vangaurd', 1, 2, 3, 4, 5, 6, 'asdf', '3456t4gf', 'asdf4rgfasert', 'asdfaw345ewf'].map(x => ({ name: x, value: x }))} />
+
+        </div>
       <div label="Rich Text Editor Set State Later">
         <FDateTime maxDate={new Date()} maxTime={new Date()} />
         <RichTextEditor linkTo={LT} name="test1"/>
