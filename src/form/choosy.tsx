@@ -148,9 +148,17 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
         this.setState(this.state);
         this.onChange({});
     }
+
+    betterRegExp(string: string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
+    }
+
+
     searchItems(e: any) {
         let val = e.target.value;
-        let regex = new RegExp('.*' + val + '.*', 'ig');
+        let betterVal = this.betterRegExp(val);
+        let regex = new RegExp(betterVal, 'i');
+        // let regex = new RegExp('.*' + val + '.*', 'ig');
         let matches = this.props.items.filter(x => regex.test(x.name));
         console.log(matches)
         this.setState({ matches, matchIndex: 0 });
