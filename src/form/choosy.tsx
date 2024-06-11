@@ -150,6 +150,9 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
     }
 
     betterRegExp(string: string) {
+        if(!string){
+            string = '';
+        }
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
     }
 
