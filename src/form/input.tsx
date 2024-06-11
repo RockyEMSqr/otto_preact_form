@@ -166,7 +166,7 @@ export abstract class Input<P = {}, S = {}> extends Component<
         return classes.join(' ');
     }
     get inputWrapperClass() {
-        let classes = [];
+        let classes:string[] = [];
         if (this.prepend || this.append) {
             classes.push('input-group');
         }

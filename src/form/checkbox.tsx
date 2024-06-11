@@ -46,7 +46,7 @@ export class Checkbox<T> extends Input<InputNameCheckProps<T>> {
         }
     }
 
-    public get checked(): boolean | undefined {
+    public get checked(){
         if (this.props.linkTo) {
             let valOrArrayOfVals = delve(this.props.linkTo.state, this.props.name as string);
             if (valOrArrayOfVals) {

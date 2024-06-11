@@ -84,7 +84,7 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
             this.setState({ matches: [] })
         }
     }
-    windowClickHandler(e) {
+    windowClickHandler(e:any) {
 
         //check if element clicked was part of choosy.
         // if not close it

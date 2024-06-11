@@ -37,10 +37,10 @@ export declare abstract class Input<P = {}, S = {}> extends Component<AllInputPr
     getOnChange(): any;
     getOnInput(): (e: any) => void;
     get label(): string | h.JSX.Element;
-    get isRequired(): boolean;
+    get isRequired(): boolean | h.JSX.SignalLike<boolean>;
     get inputClass(): string;
     get labelClass(): "" | "required";
-    get id(): string;
+    get id(): string | h.JSX.SignalLike<string>;
     get wrapperClass(): string;
     get inputWrapperClass(): string;
     render(props?: any, state?: any): h.JSX.Element;

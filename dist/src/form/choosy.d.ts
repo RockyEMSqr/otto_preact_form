@@ -37,6 +37,7 @@ export declare class Choosy<T = {}> extends Input<InputNameCheckProps<T> & {
     clearInput(): void;
     onChange(e: any): Promise<void>;
     remove(i: number, e: Event): void;
+    betterRegExp(string: string): string;
     searchItems(e: any): void;
     onKeyDown(e: KeyboardEvent): boolean;
     blurTimer: any;

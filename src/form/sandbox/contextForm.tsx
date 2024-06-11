@@ -1,6 +1,6 @@
 import { Component, createContext, h } from 'preact';
 import { useContext } from 'preact/hooks';
-import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath';
+// import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath';
 import { dget } from '../../utils';
 import { getInput } from './linkedInput';
 
@@ -31,7 +31,7 @@ export function Text<O, P extends string>(p: CtxFormInputProps<O, P>) {
 }
 export function DDate<O, P extends string>(p: CtxFormInputProps<O, P>) {
     const fc = useContext(FormContext);
-    let value = null;
+    let value: string | null = null;
     let v = dget(fc.state, p.name);
     if (v) {
         value = new Date(v).toISOString().split('T')[0];

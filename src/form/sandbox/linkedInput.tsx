@@ -1,11 +1,12 @@
 import { h, Fragment } from 'preact';
-import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath'
+// import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath'
 import preact, { Component } from "preact"
 import { useCallback } from 'preact/hooks';
 import { dget, dset } from '../../utils';
 
 type InputProps<T, N extends string> = {
-    name: AutoPath<T, N>,
+    // name: AutoPath<T, N>,
+    name:string,
     label: string | preact.FunctionalComponent | Component,
     state: T,
     setState: Function
@@ -38,7 +39,7 @@ export function LinkedText<T extends object, N extends string>(p: InputProps<T, 
     return getInput<T, N>('text', p);
 }
 export function DateInp<T extends Object, N extends string>(p: InputProps<T, N>) {
-    let value = null;
+    let value:string|null = null;
     let v = dget(p.state, p.name);
     if (v) {
         value = new Date(v).toISOString().split('T')[0];

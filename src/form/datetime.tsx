@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { Input, InputNameCheckProps } from "./input";
 import { Hidden } from './hidden'
 import { dset } from '../utils';
-export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & {maxDate?:Date, maxTime?:Date}> {
+export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDate?: Date, maxTime?: Date }> {
     getDT(val: number | string | Date | undefined): DateTime | undefined {
         let dt: DateTime | undefined;
         if (val) {
@@ -142,12 +142,12 @@ export class FDateTime<T> extends DTInput<T> {
         return this.onChangeCB;
     }
     render(props?: any, state?: any) {
-        let maxDate = null;
-        if(props.maxDate){
+        let maxDate: undefined | string = undefined;
+        if (props.maxDate) {
             maxDate = DateTime.fromJSDate(new Date(props.maxDate)).toFormat('yyyy-MM-dd')
         }
-         let maxTime = null;
-        if(props.maxTime){
+        let maxTime: undefined | string = undefined;
+        if (props.maxTime) {
             maxTime = DateTime.fromJSDate(new Date(props.maxTime)).toFormat('HH:mm')
         }
         return <div class="form-group row date-time-group">

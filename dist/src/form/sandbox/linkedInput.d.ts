@@ -1,8 +1,7 @@
 import { h } from 'preact';
-import { AutoPath } from 'ts-toolbelt/out/Function/AutoPath';
 import preact, { Component } from "preact";
 declare type InputProps<T, N extends string> = {
-    name: AutoPath<T, N>;
+    name: string;
     label: string | preact.FunctionalComponent | Component;
     state: T;
     setState: Function;

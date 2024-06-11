@@ -9,7 +9,7 @@ export class CheckboxGroup extends Input<{ items: Item[] }> {
             <p class={`group-label ${this.isRequired ? 'required' : ''}`}>{this.label}</p><ul class="checkbox">
                 {props.items && props.items.map((x: Item) => (
                     <li>
-                        <Checkbox linkTo={this.props.linkTo} disabled={props.disabled} onChange={this.props.onChange} name={this.props.name} label={x.name} value={x.value} />
+                        <Checkbox linkTo={this.props.linkTo} disabled={props.disabled} onChange={this.props.onChange} name={this.props.name as string} label={x.name} value={x.value} />
                     </li>
                 ))}
             </ul></div>;

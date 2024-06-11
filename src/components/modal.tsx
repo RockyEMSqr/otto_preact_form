@@ -125,7 +125,7 @@ export abstract class BaseModal<P = {}, S = {}> extends Component<
     getModalClass() {
         let classes = ['modal-box'];
         if(this.props.backgroundClass){
-            classes.push(this.props.class);
+            classes.push(this.props.class as string);
         }
         return classes.join(' ');
     }
@@ -213,7 +213,7 @@ export abstract class ConfirmCloseModal extends Component<any, any> {
 
     abstract render(props?, state?)
 }
-export class SimpleModal<P={}, S = {}> extends BaseModal<P & ModalProps & {dismissible?:boolean},
+export class SimpleModal<P={}, S = {}> extends BaseModal<P & ModalProps & {dismissible?:boolean, label:any},
     S & ModalState> {
     renderModalContent() {
         return <div>
