@@ -62,7 +62,7 @@ export class Choosy<T={}> extends Input<InputNameCheckProps<T> & {
                 }
             }
         }
-
+        this.setState({...this.state});
         window.addEventListener('focusin', this.thewindowFocusInHandler);
         window.addEventListener('click', this.thewindowClickHandler);
     }
