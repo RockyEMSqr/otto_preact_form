@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { Input, InputNameCheckProps } from "./input";
 import { Hidden } from './hidden'
 import { dset } from '../utils';
-export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDate?: Date, maxTime?: Date }> {
+export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDate?: Date, maxTime?: Date, tz?: string }> {
     getDT(val: number | string | Date | undefined): DateTime | undefined {
         let dt: DateTime | undefined;
         if (val) {
@@ -16,12 +16,18 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
             } else if (val.constructor.name == "Date") {
                 dt = DateTime.fromJSDate(val);
             }
+            if (this.props.tz) {
+                dt = dt.setZone(this.props.tz);
+            }
 
         }
         return dt;
     }
     getValue() {
         let dt = this.getDT(super.getValue());
+        if (this.props.tz) {
+            dt = dt.setZone(this.props.tz);
+        }
         if (dt) {
             return dt.toISO();
         }
@@ -34,11 +40,17 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
                 this.setState({ value: e.target.value });
                 if (this.props.linkTo) {
                     let dt = this.getDT(e.target.value)
+                    if (this.props.tz) {
+                        dt = dt.setZone(this.props.tz);
+                    }
                     dset(this.props.linkTo.state, this.props.name, dt ? dt.toISO() : null)
                     this.props.linkTo.setState(this.props.linkTo.state);
                 }
                 if (this.props.onChange) {
                     let dt = this.getDT(e.target.value)
+                    if (this.props.tz) {
+                        dt = dt.setZone(this.props.tz);
+                    }
                     e.data = dt ? dt.toISO() : null
                     this.props.onChange(e);
                 }
@@ -52,6 +64,9 @@ export class FDate<T> extends DTInput<T> {
 
     getDateString() {
         let dt = this.getDT(super.getValue());
+        if (this.props.tz) {
+            dt = dt.setZone(this.props.tz);
+        }
         if (dt) {
             return dt.toFormat('yyyy-MM-dd')
         } else {
