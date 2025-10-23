@@ -4,6 +4,7 @@ import { Input, InputNameCheckProps } from "./input";
 export declare abstract class DTInput<T> extends Input<InputNameCheckProps<T> & {
     maxDate?: Date;
     maxTime?: Date;
+    tz?: string;
 }> {
     getDT(val: number | string | Date | undefined): DateTime | undefined;
     getValue(): string;
