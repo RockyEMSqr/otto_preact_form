@@ -17,7 +17,7 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
                 dt = DateTime.fromJSDate(val);
             }
             if (this.props.tz) {
-                dt = dt.setZone(this.props.tz);
+                dt = dt?.setZone(this.props.tz);
             }
 
         }
@@ -26,7 +26,7 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
     getValue() {
         let dt = this.getDT(super.getValue());
         if (this.props.tz) {
-            dt = dt.setZone(this.props.tz);
+            dt = dt?.setZone(this.props.tz);
         }
         if (dt) {
             return dt.toISO();
@@ -41,7 +41,7 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
                 if (this.props.linkTo) {
                     let dt = this.getDT(e.target.value)
                     if (this.props.tz) {
-                        dt = dt.setZone(this.props.tz);
+                        dt = dt?.setZone(this.props.tz);
                     }
                     dset(this.props.linkTo.state, this.props.name, dt ? dt.toISO() : null)
                     this.props.linkTo.setState(this.props.linkTo.state);
@@ -49,7 +49,7 @@ export abstract class DTInput<T> extends Input<InputNameCheckProps<T> & { maxDat
                 if (this.props.onChange) {
                     let dt = this.getDT(e.target.value)
                     if (this.props.tz) {
-                        dt = dt.setZone(this.props.tz);
+                        dt = dt?.setZone(this.props.tz);
                     }
                     e.data = dt ? dt.toISO() : null
                     this.props.onChange(e);
@@ -65,7 +65,7 @@ export class FDate<T> extends DTInput<T> {
     getDateString() {
         let dt = this.getDT(super.getValue());
         if (this.props.tz) {
-            dt = dt.setZone(this.props.tz);
+            dt = dt?.setZone(this.props.tz);
         }
         if (dt) {
             return dt.toFormat('yyyy-MM-dd')
